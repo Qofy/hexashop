@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <header className="flex items-center justify-between h-20 w-full bg-header-bg text-text-color px-30">
         <div className="flex gap-1.5">
-          <Link href="/">          
+          <Link href="/home">          
             <Image src={Header.logo} 
           alt={Header.shopName}
           width={50}
@@ -19,7 +19,9 @@ export default function Header() {
             <p className="text-[0.7rem]">{Header.abt}</p>
             </div>
         </div>
-        <div>dvskjdh</div>
+        <div className="flex gap-6.5">
+          {Header.nav.map((navs)=> <Link href={`/${navs.toLowerCase()}`} key={navs} className=""> {navs}</Link>)}
+        </div>
     </header>
   )
 };

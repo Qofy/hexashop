@@ -18,6 +18,6 @@ export const content:ContentType = {
     "logo": logo,
     "shopName": "HEXASHOP", 
     "abt": "ONLINE SHOPPING",
-    "nav": ["Home", "Men's", "Women's", "Kid's", "About Us", "Contact Us"]
+    "nav": ["Home", "Men's", "Women's", "Kid's", "About Us", "Contact Us"],
   }
 };

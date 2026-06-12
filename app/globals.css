@@ -9,7 +9,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-lora-san);
-  --font-mono: var(--font-geist-mono);
+  /* --font-mono: var(--font-geist-mono); */
   --color-header-bg: #d9d9d9;
   --color-text-color: #171717
 }
@@ -22,7 +22,7 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--foreground);
+  color: var(--background);
+  /* font-family: Arial, Helvetica, sans-serif; */
 }
