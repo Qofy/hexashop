@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Lora } from "next/font/google";
+import Header from "@/component/Header";
 
 const lora = Lora({
   subsets: ['latin'],
@@ -33,6 +34,7 @@ export default function RootLayout({
       lang="en"
       className={`${lora.variable} h-full antialiased`}
     >
+      <Header/>
       <body className={` min-h-full flex flex-col`}>{children}</body>
     </html>
   );
