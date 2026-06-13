@@ -1,16 +1,9 @@
 // type Props = {}
 
+import Hero from "@/component/Hero";
+
 export default function HomePage() {
   return (
-    <div className="px-100">
-        Home
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
+   <Hero/>
   )
 };
