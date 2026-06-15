@@ -21,6 +21,12 @@ type HeroType ={
   btnText: string
 }
 
+type MenType= {
+  header:string,
+  desc:string,
+  content:[]
+}
+
 type ContentType = {
     Header: HeaderType;
     Hero:{
@@ -32,6 +38,11 @@ type ContentType = {
         accessories?: HeroType
 
       };
+    };
+    Men: {
+     [key:string]: MenType | {
+      menLatest?: MenType
+     }
     }
 }
 export const content:ContentType = {
@@ -50,28 +61,36 @@ export const content:ContentType = {
     "btnText":"Purchase Now"
     },
     "women": {
-       "bgImage": womenSakko,
-    "overLayText": "We are Hexashop",
-    "overLayPara":"Look nice in a cheap cost fashion wear. We bring you the world of fashion",
-    "btnText":"Purchase Now"
+    "bgImage": womenSakko,
+    "overLayText": "Women",
+    "overLayPara":"Women fashion selection sets and discovery",
+    "btnText":"Discover More"
     },
     "men": {
-       "bgImage": men,
-    "overLayText": "We are Hexashop",
-    "overLayPara":"Look nice in a cheap cost fashion wear. We bring you the world of fashion",
-    "btnText":"Purchase Now"
+    "bgImage": men,
+    "overLayText": "Men",
+    "overLayPara":"Be 3% of best looking men in fashion",
+    "btnText":"Discover More"
     },
     "kids": {
-       "bgImage": kids,
-    "overLayText": "We are Hexashop",
-    "overLayPara":"Look nice in a cheap cost fashion wear. We bring you the world of fashion",
-    "btnText":"Purchase Now"
+    "bgImage": kids,
+    "overLayText": "Kids",
+    "overLayPara":"Make your kids looks super star",
+    "btnText":"Discover More"
     },
     "accessories": {
-       "bgImage": accessories,
-    "overLayText": "We are Hexashop",
-    "overLayPara":"Look nice in a cheap cost fashion wear. We bring you the world of fashion",
-    "btnText":"Purchase Now"
+    "bgImage": accessories,
+    "overLayText": "Accessories",
+    "overLayPara":"Buy more fashion and design wears at cheap price at Hexashop",
+    "btnText":"Discover More"
     }
+  },
+  "Men":{
+    "menLatest":{
+    "header":"Men's Latest",
+    "desc": "Discover men latest designer and fashion wears",
+    "content":[]
   }
+}
+
 };
