@@ -1,55 +1,60 @@
 import logo from "@/public/assets/logo.png"
 import { StaticImageData } from "next/image";
+import { z } from "zod";
 import welLog from "@/public/assets/men/anzug.jpg"
 import womenSakko from "@/public/assets/women/women-sakko.png"
 import accessories from "@/public/assets/accessories/accessories1.png"
 import kids from "@/public/assets/kids/kids-jacke.png"
 import men from "@/public/assets/men/men-sakko.png"
-// import { ReactNode } from "react";
-type HeaderType = {
-    id:number,
-    logo:StaticImageData,
-    shopName:string,
-    abt:string,
-    nav:string[];
-}
 
-type HeroType ={
-  bgImage: StaticImageData,
-  overLayText: string,
-  overLayPara: string,
-  btnText: string
-}
+const ImageDataSchema = z.custom<StaticImageData>((data) => {
+  return typeof data === 'object' && data !== null && 'src' in data;
+}, { message: 'Invalid image data' });
 
-type MenType= {
-  header:string,
-  desc:string,
-  content:[]
-}
+const HeaderSchema = z.object({
+  id: z.number(),
+  logo: ImageDataSchema,
+  shopName: z.string(),
+  abt: z.string(),
+  nav: z.array(z.string()),
+});
 
-type ContentType = {
-    Header: HeaderType;
-    Hero:{
-      [key:string]: HeroType | {
-        welcome?: HeroType,
-        women?: HeroType,
-        men?: HeroType
-        kids?: HeroType
-        accessories?: HeroType
+const HeroSchema = z.object({
+  bgImage: ImageDataSchema,
+  overLayText: z.string(),
+  overLayPara: z.string(),
+  btnText: z.string(),
+});
 
-      };
-    };
-    Men: {
-     [key:string]: MenType | {
-      menLatest?: MenType
-     }
-    }
-}
-export const content:ContentType = {
+const MenSchema = z.object({
+  header: z.string(),
+  desc: z.string(),
+  content: z.array(z.any()),
+});
+
+const ContentSchema = z.object({
+  Header: HeaderSchema,
+  Hero: z.object({
+    welcome: HeroSchema.optional(),
+    women: HeroSchema.optional(),
+    men: HeroSchema.optional(),
+    kids: HeroSchema.optional(),
+    accessories: HeroSchema.optional(),
+  }),
+  Men: z.object({
+    menLatest: MenSchema.optional(),
+  }),
+});
+
+type HeaderType = z.infer<typeof HeaderSchema>;
+type HeroType = z.infer<typeof HeroSchema>;
+type MenType = z.infer<typeof MenSchema>;
+type ContentType = z.infer<typeof ContentSchema>;
+const contentData = {
   "Header": {
     "id": 1,
     "logo": logo,
-    "shopName": "HEXASHOP", 
+    "shopName": "HEXASHOP",
     "abt": "ONLINE SHOPPING",
     "nav": ["Home", "Men's", "Women's", "Kid's", "About Us", "Contact Us"],
   },
@@ -92,5 +97,9 @@ export const content:ContentType = {
     "content":[]
   }
 }
-
 };
+
+export const content: ContentType = ContentSchema.parse(contentData);
+
+export { HeaderSchema, HeroSchema, MenSchema, ContentSchema };
+export type { HeaderType, HeroType, MenType, ContentType };
