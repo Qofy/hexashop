@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { content } from "./componentDatas/content_context"
+import { content } from "../data/componentDatas/content_context"
 import Link from "next/link"
 
 export default function Header() {

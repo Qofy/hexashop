@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Lora } from "next/font/google";
 import Header from "@/component/Header";
+import { Providers } from "./providers";
 
 const lora = Lora({
   subsets: ['latin'],
@@ -36,7 +37,9 @@ export default function RootLayout({
       lang="en"
       className={`${lora.variable} h-full antialiased`}
       >
-      <body className={` min-h-full flex flex-col`}>{children}</body>
+      <body className={` min-h-full flex flex-col`}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
     </>
 

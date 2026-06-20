@@ -1,6 +1,6 @@
 // type Props = {}
 import Link from "next/link"
-import { content } from "./componentDatas/content_context"
+import { content } from "../data/componentDatas/content_context"
 
 export default function Hero() {
     const {Hero} = content

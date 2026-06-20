@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
+import axios from 'axios';
 import { z } from 'zod';
 
 const MenProductSchema = z.object({
@@ -20,61 +21,41 @@ const MenProductSchema = z.object({
 
 export type MenProduct = z.infer<typeof MenProductSchema>;
 
-type FetchState = {
-  data: MenProduct[];
-  loading: boolean;
-  error: string | null;
-};
+const axiosInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
+  timeout: 10000,
+});
 
-export function useMenProducts(category?: 'latest' | 'featured' | 'casual' | 'trending') {
-  const [state, setState] = useState<FetchState>({
-    data: [],
-    loading: true,
-    error: null,
+type CategoryType = 'latest' | 'featured' | 'casual' | 'trending';
+
+async function fetchMenProducts(category?: CategoryType, limit?: number) {
+  const { data } = await axiosInstance.get<{
+    success: boolean;
+    data: unknown[];
+    count: number;
+    error?: string;
+  }>('/api/men', {
+    params: category ? { category } : {},
   });
 
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        setState(prev => ({ ...prev, loading: true, error: null }));
+  if (!data.success) {
+    throw new Error(data.error || 'Failed to fetch products');
+  }
 
-        const url = new URL('/api/men', window.location.origin);
-        if (category) {
-          url.searchParams.append('category', category);
-        }
+  const products = data.data.map((item: unknown) => MenProductSchema.parse(item));
 
-        const response = await fetch(url.toString());
+  return limit ? products.slice(0, limit) : products;
+}
 
-        if (!response.ok) {
-          throw new Error(`API error: ${response.statusText}`);
-        }
-
-        const result = await response.json();
-
-        if (!result.success) {
-          throw new Error(result.error || 'Failed to fetch products');
-        }
-
-        // Validate response data
-        const validated = result.data.map((item: any) => MenProductSchema.parse(item));
-
-        setState({
-          data: validated,
-          loading: false,
-          error: null,
-        });
-      } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-        setState({
-          data: [],
-          loading: false,
-          error: errorMessage,
-        });
-      }
+export function useMenProducts(category?: CategoryType, limit?:number) {
+  return useQuery(
+    ['menProducts', category,limit],
+    () => fetchMenProducts(category, limit),
+    {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      cacheTime: 1000 * 60 * 10, // 10 minutes
+      retry: 2,
+      refetchOnWindowFocus: false,
     }
-
-    fetchProducts();
-  }, [category]);
-
-  return state;
+  );
 }
