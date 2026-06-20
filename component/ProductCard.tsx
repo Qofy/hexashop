@@ -10,7 +10,7 @@ type Props = {
 
 export default function ProductCard({ product }: Props) {
   return (
-    <div className="bg-header-bg  shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div className="bg-header-bg w-74 shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       {/* Product Image */}
       <div className="relative w-full h-74 bg-gray-100">
         <Image

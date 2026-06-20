@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <>
    <Hero/>
-   <div className="bg-com-bg flex flex-col">
+   <div className="bg-com-bg flex flex-col px-14">
    <MenProducts category="latest" 
    limit={4} 
    title="Men's Latest Collection" 
