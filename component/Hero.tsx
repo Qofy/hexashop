@@ -7,7 +7,7 @@ export default function Hero() {
     const {welcome,women,men,kids,accessories} = Hero
     console.log(welcome.btnText)
   return (
-     <div className="grid grid-cols-4 grid-rows-12 gap-2 min-h-170 mt-10 mx-50 text-white">
+     <div className="grid grid-cols-4 grid-rows-12 gap-2 min-h-170 mt-10 mx-50 mb-10 text-white">
         {/* Home */}
         <div style={{backgroundImage:` linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),url(${welcome.bgImage.src})`, 
         backgroundRepeat:"no-repeat", 

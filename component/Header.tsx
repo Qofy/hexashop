@@ -5,7 +5,8 @@ import Link from "next/link"
 export default function Header() {
   const {Header} = content
   return (
-    <header className="flex items-center justify-between h-20 w-full bg-header-bg text-text-color px-30">
+    <header className="flex items-center justify-between fixed top-0 left-0 z-50 h-20 w-full bg-header-bg text-text-color px-30">
+
         <div className="flex gap-1.5">
           <Link href="/home">          
             <Image src={Header.logo} 
