@@ -32,7 +32,7 @@ export default function ProductCard({ product }: Props) {
           {Array.from({ length: 5 }).map((_, i) => (
             <Star
               key={i}
-              size={16}
+              size={12}
               className={
                 i < Math.round(product.starRate)
                   ? 'fill-yellow-400 text-yellow-400'
