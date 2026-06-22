@@ -32,6 +32,15 @@ const MenSchema = z.object({
   content: z.array(z.any()),
 });
 
+const DiscoverSchema = z.object({
+  image1: ImageDataSchema,
+  image2: ImageDataSchema,
+  title: z.string(),
+  description1: z.string(),
+  description2: z.string(),
+  buttonText: z.string(),
+});
+
 const ContentSchema = z.object({
   Header: HeaderSchema,
   Hero: z.object({
@@ -44,11 +53,13 @@ const ContentSchema = z.object({
   Men: z.object({
     menLatest: MenSchema.optional(),
   }),
+  Discover: DiscoverSchema.optional(),
 });
 
 type HeaderType = z.infer<typeof HeaderSchema>;
 type HeroType = z.infer<typeof HeroSchema>;
 type MenType = z.infer<typeof MenSchema>;
+type DiscoverType = z.infer<typeof DiscoverSchema>;
 type ContentType = z.infer<typeof ContentSchema>;
 const contentData = {
   "Header": {
@@ -96,10 +107,18 @@ const contentData = {
     "desc": "Discover men latest designer and fashion wears",
     "content":[]
   }
-}
+},
+  "Discover": {
+    "image1": welLog,
+    "image2": men,
+    "title": "Discover New Collection",
+    "description1": "Explore our premium collection of men's fashion.",
+    "description2": "From casual wear to formal suits, find your perfect style.",
+    "buttonText": "Discover More"
+  }
 };
 
 export const content: ContentType = ContentSchema.parse(contentData);
 
-export { HeaderSchema, HeroSchema, MenSchema, ContentSchema };
-export type { HeaderType, HeroType, MenType, ContentType };
+export { HeaderSchema, HeroSchema, MenSchema, DiscoverSchema, ContentSchema };
+export type { HeaderType, HeroType, MenType, DiscoverType, ContentType };

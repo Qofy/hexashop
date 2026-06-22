@@ -9,7 +9,6 @@ export default function Men() {
       <MenProducts category="featured" title="Futured"/>
       <MenProducts category="casual" title="Casual"/>
       <MenProducts category="trending" title="Men's Treding"/>
-
     </div>
   )
 };
