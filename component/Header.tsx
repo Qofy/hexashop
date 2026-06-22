@@ -21,7 +21,11 @@ export default function Header() {
             </div>
         </div>
         <div className="flex gap-6.5">
-          {Header.nav.map((navs)=> <Link href={`/${navs.toLowerCase()}`} key={navs} className=""> {navs}</Link>)}
+    {Header.nav.map((nav) => (
+     <Link href={nav.href} key={nav.href} className="">
+     {nav.label}
+   </Link>
+ ))}
         </div>
     </header>
   )

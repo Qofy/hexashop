@@ -16,7 +16,10 @@ const HeaderSchema = z.object({
   logo: ImageDataSchema,
   shopName: z.string(),
   abt: z.string(),
-  nav: z.array(z.string()),
+  nav: z.array(z.object({
+    label: z.string(),
+    href: z.string(),
+  })),
 });
 
 const HeroSchema = z.object({
@@ -67,7 +70,14 @@ const contentData = {
     "logo": logo,
     "shopName": "HEXASHOP",
     "abt": "ONLINE SHOPPING",
-    "nav": ["Home", "Men", "Women", "Kids", "About Us", "Contact Us"],
+"nav": [
+  { label: "Home", href: "/home" },
+  { label: "Men", href: "/men" },
+  { label: "Women", href: "/women" },
+  { label: "Kids", href: "/kids" },
+  { label: "About Us", href: "/about-us" },
+  { label: "Contact Us", href: "/contact-us" }
+],
   },
   "Hero":{
     "welcome":{
