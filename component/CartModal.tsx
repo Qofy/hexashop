@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { X, Trash2, Plus, Minus } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { closeCart, removeFromCart, updateQuantity } from '@/slices/cartSlice';
+import { openCheckout } from '@/slices/checkoutSlice';
+import CheckoutModal from './CheckoutModal';
 
 export default function CartModal() {
   const dispatch = useAppDispatch();
@@ -111,12 +113,19 @@ export default function CartModal() {
               <span>Total:</span>
               <span>${total.toLocaleString()}</span>
             </div>
-            <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+            <button
+              onClick={() => {
+                dispatch(closeCart());
+                dispatch(openCheckout());
+              }}
+              className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            >
               Checkout
             </button>
           </div>
         )}
       </div>
+      <CheckoutModal />
     </>
   );
 }
