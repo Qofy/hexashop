@@ -3,12 +3,19 @@
 import Image from 'next/image';
 import { Star, ShoppingCart, Heart } from 'lucide-react';
 import { MenProduct } from '@/data/mendata/mendata';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { addToCart } from '@/slices/cartSlice';
+import { addToFavorites, removeFromFavorites } from '@/slices/favoritesSlice';
+import type { RootState } from '@/store/store';
 
 type Props = {
   product: MenProduct;
 };
 
 export default function ProductCard({ product }: Props) {
+  const dispatch = useAppDispatch();
+  const favorites = useAppSelector((state: RootState) => state.favorites.items);
+  const isFavorited = favorites.some(item => item.id === product.id);
   return (
     <div className="bg-header-bg w-74 shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       {/* Product Image */}
@@ -52,8 +59,29 @@ export default function ProductCard({ product }: Props) {
           ${product.price}
         </p>       
           <div className='flex gap-1.5'>
-            <Heart color='red' size={20} className='cursor-pointer'/>
-            <ShoppingCart  size={20} className='cursor-pointer'/>
+            <button
+              onClick={() => {
+                if (isFavorited) {
+                  dispatch(removeFromFavorites(product.id));
+                } else {
+                  dispatch(addToFavorites(product));
+                }
+              }}
+              className='hover:bg-gray-100 p-1 rounded transition-colors'
+            >
+              <Heart
+                size={20}
+                className={`cursor-pointer ${
+                  isFavorited ? 'fill-red-500 text-red-500' : 'text-gray-600'
+                }`}
+              />
+            </button>
+            <button
+              onClick={() => dispatch(addToCart(product))}
+              className='hover:bg-gray-100 p-1 rounded transition-colors'
+            >
+              <ShoppingCart size={20} className='cursor-pointer'/>
+            </button>
           </div>
         </div>
 

@@ -31,17 +31,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <Header/>
     <html
       lang="en"
       className={`${lora.variable} h-full antialiased`}
       >
       <body className={` min-h-full flex flex-col pt-20`}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
-    </>
-
   );
 }
