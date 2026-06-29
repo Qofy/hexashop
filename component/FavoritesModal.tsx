@@ -20,18 +20,25 @@ export default function FavoritesModal() {
           isOpen ? 'opacity-50' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => dispatch(closeFavorites())}
+        aria-hidden={!isOpen}
       />
 
       {/* Modal */}
-      <div className={`fixed left-0 top-0 h-full w-96 bg-white shadow-2xl z-50 flex flex-col transition-transform duration-500 ease-in-out ${
-        isOpen ? 'translate-x-0' : '-translate-x-full'
-      }`}>
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="favorites-title"
+        hidden={!isOpen}
+        className={`fixed left-0 top-0 h-full w-96 bg-white shadow-2xl z-50 flex flex-col transition-transform duration-500 ease-in-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}>
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-2xl font-bold">{favoritesContent?.title}</h2>
+          <h2 id="favorites-title" className="text-2xl font-bold">{favoritesContent?.title}</h2>
           <button
             onClick={() => dispatch(closeFavorites())}
             className="p-2 hover:bg-gray-100 rounded-lg"
+            aria-label="Close favorites"
           >
             <X size={24} />
           </button>
@@ -92,6 +99,7 @@ export default function FavoritesModal() {
                     <button
                       onClick={() => dispatch(removeFromFavorites(item.id))}
                       className="text-red-500 hover:bg-red-50 p-2 rounded-lg"
+                      aria-label={`Remove ${item.clothName} from favorites`}
                     >
                       <Trash2 size={18} />
                     </button>

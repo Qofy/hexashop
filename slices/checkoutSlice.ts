@@ -65,6 +65,7 @@ const checkoutSlice = createSlice({
       state.formData = {};
       state.error = null;
       state.success = false;
+      state.showCongratulations = false;
     },
     placeOrder: (state, action: PayloadAction<{ total: number; itemCount: number }>) => {
       state.loading = true;
