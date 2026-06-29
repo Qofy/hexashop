@@ -30,6 +30,7 @@ interface CheckoutState {
   orderTotal: number;
   showCongratulations: boolean;
   orderId: string;
+  orderItemCount: number;
 }
 
 const initialState: CheckoutState = {
@@ -42,6 +43,7 @@ const initialState: CheckoutState = {
   orderTotal: 0,
   showCongratulations: false,
   orderId: '',
+  orderItemCount: 0,
 };
 
 const checkoutSlice = createSlice({
@@ -67,6 +69,7 @@ const checkoutSlice = createSlice({
     placeOrder: (state, action: PayloadAction<{ total: number; itemCount: number }>) => {
       state.loading = true;
       state.error = null;
+      state.orderItemCount = action.payload.itemCount;
     },
     orderSuccess: (state, action: PayloadAction<number>) => {
       state.loading = false;
@@ -78,7 +81,7 @@ const checkoutSlice = createSlice({
         id: state.orderId,
         date: new Date().toLocaleDateString(),
         total: action.payload,
-        items: 0,
+        items: state.orderItemCount,
         status: 'processing',
       };
       state.orders.push(order);

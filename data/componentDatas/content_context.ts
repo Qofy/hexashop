@@ -42,6 +42,7 @@ const DiscoverSchema = z.object({
   description1: z.string(),
   description2: z.string(),
   buttonText: z.string(),
+  href: z.string(),
 });
 
 const CartSchema = z.object({
@@ -188,7 +189,8 @@ const contentData = {
     "title": "Discover New Collection",
     "description1": "Explore our premium collection of men's fashion.",
     "description2": "From casual wear to formal suits, find your perfect style.",
-    "buttonText": "Discover More"
+    "buttonText": "Discover More",
+    "href": "/men"
   },
   "Cart": {
     "title": "Shopping Cart",

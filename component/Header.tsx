@@ -5,8 +5,8 @@ import { content } from "../data/componentDatas/content_context"
 import Link from "next/link"
 import { ShoppingCart, Heart } from "lucide-react"
 import { useAppDispatch, useAppSelector } from "@/store/hooks"
-import { openCart } from "@/slices/cartSlice"
-import { openFavorites } from "@/slices/favoritesSlice"
+import { openCart, closeCart } from "@/slices/cartSlice"
+import { openFavorites, closeFavorites } from "@/slices/favoritesSlice"
 import CartModal from "./CartModal"
 import FavoritesModal from "./FavoritesModal"
 import type { RootState } from "@/store/store"
@@ -40,8 +40,12 @@ export default function Header() {
    </Link>
  ))}
           <button
-            onClick={() => dispatch(openFavorites())}
+            onClick={() => {
+              dispatch(openFavorites());
+              dispatch(closeCart());
+            }}
             className="relative p-2 hover:bg-gray-200 bg-gray-50 rounded-full transition-colors"
+            aria-label={`Open favorites. ${favItems.length} item${favItems.length !== 1 ? 's' : ''} saved.`}
           >
             <Heart size={20} />
             {favItems.length > 0 && (
@@ -52,8 +56,12 @@ export default function Header() {
           </button>
 
           <button
-            onClick={() => dispatch(openCart())}
+            onClick={() => {
+              dispatch(openCart());
+              dispatch(closeFavorites());
+            }}
             className="relative p-2 hover:bg-gray-200 bg-gray-50 rounded-full transition-colors"
+            aria-label={`Open shopping cart. ${cartCount} item${cartCount !== 1 ? 's' : ''} in cart.`}
           >
             <ShoppingCart size={20} />
             {cartCount > 0 && (

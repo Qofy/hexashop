@@ -23,18 +23,25 @@ export default function CartModal() {
           isOpen ? 'opacity-50' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => dispatch(closeCart())}
+        aria-hidden={!isOpen}
       />
 
       {/* Modal */}
-      <div className={`fixed right-0 top-0 h-full w-96 bg-white shadow-2xl z-50 flex flex-col transition-transform duration-500 ease-in-out ${
-        isOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}>
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cart-title"
+        hidden={!isOpen}
+        className={`fixed right-0 top-0 h-full w-96 bg-white shadow-2xl z-50 flex flex-col transition-transform duration-500 ease-in-out ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}>
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-2xl font-bold">{cartContent?.title}</h2>
+          <h2 id="cart-title" className="text-2xl font-bold">{cartContent?.title}</h2>
           <button
             onClick={() => dispatch(closeCart())}
             className="p-2 hover:bg-gray-100 rounded-lg"
+            aria-label="Close shopping cart"
           >
             <X size={24} />
           </button>
@@ -77,10 +84,11 @@ export default function CartModal() {
                           }))
                         }
                         className="p-1 hover:bg-gray-100"
+                        aria-label={`Decrease quantity for ${item.clothName}`}
                       >
                         <Minus size={16} />
                       </button>
-                      <span className="px-3 py-1 text-sm font-semibold">
+                      <span className="px-3 py-1 text-sm font-semibold" aria-label={`Quantity: ${item.quantity}`}>
                         {item.quantity}
                       </span>
                       <button
@@ -91,6 +99,7 @@ export default function CartModal() {
                           }))
                         }
                         className="p-1 hover:bg-gray-100"
+                        aria-label={`Increase quantity for ${item.clothName}`}
                       >
                         <Plus size={16} />
                       </button>
@@ -98,6 +107,7 @@ export default function CartModal() {
                     <button
                       onClick={() => dispatch(removeFromCart(item.id))}
                       className="text-red-500 hover:bg-red-50 p-2 rounded-lg"
+                      aria-label={`Remove ${item.clothName} from cart`}
                     >
                       <Trash2 size={18} />
                     </button>

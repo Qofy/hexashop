@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { DiscoverType } from '@/data/componentDatas/content_context';
 
 type Props = DiscoverType;
@@ -12,6 +13,7 @@ export default function Discover({
   description1,
   description2,
   buttonText,
+  href,
 }: Props) {
   return (
     <div className="flex gap-8 items-center py-16 px-6">
@@ -40,9 +42,9 @@ export default function Discover({
         <h1 className="text-5xl font-bold text-gray-900 mb-4">{title}</h1>
         <p className="text-gray-600 text-lg mb-3">{description1}</p>
         <p className="text-gray-600 text-lg mb-8">{description2}</p>
-        <button className="bg-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+        <Link href={href} className="inline-block bg-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
           {buttonText}
-        </button>
+        </Link>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 
 import { X, Sparkles, Check } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { closeCheckout, updateFormData, orderSuccess, resetFormData, showCongratulations, hideCongratulations } from '@/slices/checkoutSlice';
+import { closeCheckout, updateFormData, orderSuccess, resetFormData, showCongratulations, hideCongratulations, placeOrder } from '@/slices/checkoutSlice';
 import { clearCart } from '@/slices/cartSlice';
 import { content } from '@/data/componentDatas/content_context';
 import type { RootState } from '@/store/store';
@@ -36,6 +36,9 @@ export default function CheckoutModal() {
       alert(checkoutContent?.validationMessage || 'Please fill in all fields');
       return;
     }
+
+    // Dispatch placeOrder immediately to set loading state
+    dispatch(placeOrder({ total, itemCount: cartItems.length }));
 
     // Simulate order processing
     setTimeout(() => {

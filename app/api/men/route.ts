@@ -91,15 +91,15 @@ const menLatestProducts: MenProduct[] = [
 ];
 
 const menFeaturedProducts: MenProduct[] = [
-  { id: 11, image: serializeImage(designerSuit), clothName: "Designer Suit", price: 12.999, starRate: 4.9, inCart: false, isFavorite: false },
+  { id: 11, image: serializeImage(designerSuit), clothName: "Designer Suit", price: 129.99, starRate: 4.9, inCart: false, isFavorite: false },
   { id: 12, image: serializeImage(executiveBlazer), clothName: "Executive Blazer", price: 59.99, starRate: 4.6, inCart: false, isFavorite: false },
-  { id: 13, image: serializeImage(luxuryCoat), clothName: "Luxury Coat", price: 14.999, starRate: 5.0, inCart: false, isFavorite: false },
+  { id: 13, image: serializeImage(luxuryCoat), clothName: "Luxury Coat", price: 149.99, starRate: 5.0, inCart: false, isFavorite: false },
   { id: 14, image: serializeImage(premiumJacket), clothName: "Premium Jacket", price: 64.99, starRate: 4.7, inCart: false, isFavorite: false },
-  { id: 15, image: serializeImage(royalSuit), clothName: "Royal Suit", price: 13.499, starRate: 4.8, inCart: false, isFavorite: false },
+  { id: 15, image: serializeImage(royalSuit), clothName: "Royal Suit", price: 134.99, starRate: 4.8, inCart: false, isFavorite: false },
   { id: 16, image: serializeImage(eliteBlazer), clothName: "Elite Blazer", price: 79.99, starRate: 4.5, inCart: false, isFavorite: false },
-  { id: 17, image: serializeImage(grandCoat), clothName: "Grand Coat", price: 11.999, starRate: 4.9, inCart: false, isFavorite: false },
+  { id: 17, image: serializeImage(grandCoat), clothName: "Grand Coat", price: 119.99, starRate: 4.9, inCart: false, isFavorite: false },
   { id: 18, image: serializeImage(signatureJacket), clothName: "Signature Jacket", price: 84.99, starRate: 4.6, inCart: false, isFavorite: false },
-  { id: 19, image: serializeImage(heritageSuit), clothName: "Heritage Suit", price: 15.999, starRate: 5.0, inCart: false, isFavorite: false },
+  { id: 19, image: serializeImage(heritageSuit), clothName: "Heritage Suit", price: 159.99, starRate: 5.0, inCart: false, isFavorite: false },
   { id: 20, image: serializeImage(iconicBlazer), clothName: "Iconic Blazer", price: 99.99, starRate: 4.7, inCart: false, isFavorite: false },
 ];
 

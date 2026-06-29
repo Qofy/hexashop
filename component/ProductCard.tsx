@@ -68,19 +68,23 @@ export default function ProductCard({ product }: Props) {
                 }
               }}
               className='hover:bg-gray-100 p-1 rounded transition-colors'
+              aria-label={isFavorited ? `Remove ${product.clothName} from favorites` : `Add ${product.clothName} to favorites`}
+              aria-pressed={isFavorited}
             >
               <Heart
                 size={20}
                 className={`cursor-pointer ${
                   isFavorited ? 'fill-red-500 text-red-500' : 'text-gray-600'
                 }`}
+                aria-hidden="true"
               />
             </button>
             <button
               onClick={() => dispatch(addToCart(product))}
               className='hover:bg-gray-100 p-1 rounded transition-colors'
+              aria-label={`Add ${product.clothName} to cart`}
             >
-              <ShoppingCart size={20} className='cursor-pointer'/>
+              <ShoppingCart size={20} className='cursor-pointer' aria-hidden="true"/>
             </button>
           </div>
         </div>
