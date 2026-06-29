@@ -5,10 +5,12 @@ import { X, Trash2, ShoppingCart } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { closeFavorites, removeFromFavorites } from '@/slices/favoritesSlice';
 import { addToCart } from '@/slices/cartSlice';
+import { content } from '@/data/componentDatas/content_context';
 
 export default function FavoritesModal() {
   const dispatch = useAppDispatch();
   const { items, isOpen } = useAppSelector(state => state.favorites);
+  const favoritesContent = content.Favorites;
 
   return (
     <>
@@ -26,7 +28,7 @@ export default function FavoritesModal() {
       }`}>
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-2xl font-bold">My Favorites</h2>
+          <h2 className="text-2xl font-bold">{favoritesContent?.title}</h2>
           <button
             onClick={() => dispatch(closeFavorites())}
             className="p-2 hover:bg-gray-100 rounded-lg"
@@ -39,7 +41,7 @@ export default function FavoritesModal() {
         <div className="flex-1 overflow-y-auto p-6">
           {items.length === 0 ? (
             <div className="text-center text-gray-500 mt-12">
-              <p className="text-lg">No favorites yet</p>
+              <p className="text-lg">{favoritesContent?.emptyMessage}</p>
             </div>
           ) : (
             <div className="space-y-4">
@@ -85,7 +87,7 @@ export default function FavoritesModal() {
                       className="flex-1 flex items-center justify-center gap-2 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm"
                     >
                       <ShoppingCart size={16} />
-                      Add to Cart
+                      {favoritesContent?.addToCartButton}
                     </button>
                     <button
                       onClick={() => dispatch(removeFromFavorites(item.id))}

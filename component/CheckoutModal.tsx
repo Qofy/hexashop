@@ -4,6 +4,7 @@ import { X, Sparkles, Check } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { closeCheckout, updateFormData, orderSuccess, resetFormData, showCongratulations, hideCongratulations } from '@/slices/checkoutSlice';
 import { clearCart } from '@/slices/cartSlice';
+import { content } from '@/data/componentDatas/content_context';
 import type { RootState } from '@/store/store';
 import { FormEvent } from 'react';
 
@@ -12,6 +13,7 @@ export default function CheckoutModal() {
   const { isOpen, formData, loading, success, orderTotal, showCongratulations: showCongrats, orderId } = useAppSelector((state: RootState) => state.checkout);
   const cartItems = useAppSelector((state: RootState) => state.cart.items);
   const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const checkoutContent = content.Checkout;
 
   const handleInputChange = (field: string, value: string) => {
     dispatch(updateFormData({ [field]: value } as any));
@@ -31,7 +33,7 @@ export default function CheckoutModal() {
       !formData.zipCode ||
       !formData.paymentMethod
     ) {
-      alert('Please fill in all fields');
+      alert(checkoutContent?.validationMessage || 'Please fill in all fields');
       return;
     }
 
@@ -66,28 +68,28 @@ export default function CheckoutModal() {
             </div>
 
             <h2 className="text-3xl font-bold text-gray-900 mb-2">
-              🎉 Congratulations!
+              {checkoutContent?.congratulations.title}
             </h2>
             <p className="text-lg text-gray-600 mb-2">
-              Your order has been placed successfully
+              {checkoutContent?.congratulations.description}
             </p>
             <p className="text-sm text-gray-500 mb-6">
-              {`We'll send you updates on your order status via email. Thank you for shopping with us!`}
+              {checkoutContent?.congratulations.thankYouMessage}
             </p>
 
             {/* Order Details */}
             <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-4 mb-6 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Order ID:</span>
+                <span className="text-gray-600">{checkoutContent?.congratulations.orderIdLabel}</span>
                 <span className="font-semibold text-gray-900">{orderId}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Total Amount:</span>
+                <span className="text-gray-600">{checkoutContent?.congratulations.totalAmountLabel}</span>
                 <span className="font-bold text-blue-600">${orderTotal.toLocaleString()}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Expected Delivery:</span>
-                <span className="text-sm font-semibold text-gray-900">5-7 Business Days</span>
+                <span className="text-gray-600">{checkoutContent?.congratulations.deliveryLabel}</span>
+                <span className="text-sm font-semibold text-gray-900">{checkoutContent?.congratulations.deliveryTime}</span>
               </div>
             </div>
 
@@ -99,7 +101,7 @@ export default function CheckoutModal() {
               className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
             >
               <Check size={20} />
-              Done
+              {checkoutContent?.congratulations.doneButtonText}
             </button>
           </div>
         </div>
@@ -142,19 +144,19 @@ export default function CheckoutModal() {
                 />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Order Placed!</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">{checkoutContent?.orderConfirmation.title}</h2>
             <p className="text-gray-600 mb-6">
-              Thank you for your purchase. Your order has been confirmed and will be processed soon.
+              {checkoutContent?.orderConfirmation.description}
             </p>
             <div className="bg-gray-50 rounded-lg p-4 mb-6 text-left">
-              <p className="text-sm text-gray-600">Order Total</p>
+              <p className="text-sm text-gray-600">{checkoutContent?.orderConfirmation.totalLabel}</p>
               <p className="text-2xl font-bold text-gray-900">${orderTotal.toLocaleString()}</p>
             </div>
             <button
               onClick={() => dispatch(showCongratulations())}
               className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
             >
-              Continue Shopping
+              {checkoutContent?.orderConfirmation.continueButtonText}
             </button>
           </div>
         </div>
@@ -179,7 +181,7 @@ export default function CheckoutModal() {
         <div className="bg-white rounded-lg max-w-2xl w-full mx-4 shadow-2xl my-8">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b">
-            <h2 className="text-2xl font-bold">Checkout</h2>
+            <h2 className="text-2xl font-bold">{checkoutContent?.form.title}</h2>
             <button
               onClick={() => dispatch(closeCheckout())}
               className="p-2 hover:bg-gray-100 rounded-lg"
@@ -193,18 +195,18 @@ export default function CheckoutModal() {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Personal Info */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Personal Information</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">{checkoutContent?.form.personalInfo}</h3>
                 <div className="grid grid-cols-2 gap-4">
                   <input
                     type="text"
-                    placeholder="First Name"
+                    placeholder={checkoutContent?.form.firstNamePlaceholder}
                     value={formData.firstName || ''}
                     onChange={(e) => handleInputChange('firstName', e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <input
                     type="text"
-                    placeholder="Last Name"
+                    placeholder={checkoutContent?.form.lastNamePlaceholder}
                     value={formData.lastName || ''}
                     onChange={(e) => handleInputChange('lastName', e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -213,14 +215,14 @@ export default function CheckoutModal() {
                 <div className="grid grid-cols-2 gap-4 mt-4">
                   <input
                     type="email"
-                    placeholder="Email"
+                    placeholder={checkoutContent?.form.emailPlaceholder}
                     value={formData.email || ''}
                     onChange={(e) => handleInputChange('email', e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <input
                     type="tel"
-                    placeholder="Phone Number"
+                    placeholder={checkoutContent?.form.phonePlaceholder}
                     value={formData.phone || ''}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -230,10 +232,10 @@ export default function CheckoutModal() {
 
               {/* Address */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Shipping Address</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">{checkoutContent?.form.shippingAddress}</h3>
                 <input
                   type="text"
-                  placeholder="Address"
+                  placeholder={checkoutContent?.form.addressPlaceholder}
                   value={formData.address || ''}
                   onChange={(e) => handleInputChange('address', e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
@@ -241,21 +243,21 @@ export default function CheckoutModal() {
                 <div className="grid grid-cols-3 gap-4">
                   <input
                     type="text"
-                    placeholder="City"
+                    placeholder={checkoutContent?.form.cityPlaceholder}
                     value={formData.city || ''}
                     onChange={(e) => handleInputChange('city', e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <input
                     type="text"
-                    placeholder="State"
+                    placeholder={checkoutContent?.form.statePlaceholder}
                     value={formData.state || ''}
                     onChange={(e) => handleInputChange('state', e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <input
                     type="text"
-                    placeholder="Zip Code"
+                    placeholder={checkoutContent?.form.zipCodePlaceholder}
                     value={formData.zipCode || ''}
                     onChange={(e) => handleInputChange('zipCode', e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -265,7 +267,7 @@ export default function CheckoutModal() {
 
               {/* Payment Method */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment Method</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">{checkoutContent?.form.paymentMethod}</h3>
                 <div className="space-y-3">
                   {['credit-card', 'debit-card', 'upi', 'cod'].map((method) => (
                     <label key={method} className="flex items-center cursor-pointer">
@@ -279,12 +281,12 @@ export default function CheckoutModal() {
                       />
                       <span className="ml-3 text-gray-700">
                         {method === 'credit-card'
-                          ? 'Credit Card'
+                          ? checkoutContent?.form.creditCardLabel
                           : method === 'debit-card'
-                          ? 'Debit Card'
+                          ? checkoutContent?.form.debitCardLabel
                           : method === 'upi'
-                          ? 'UPI'
-                          : 'Cash on Delivery'}
+                          ? checkoutContent?.form.upiLabel
+                          : checkoutContent?.form.codLabel}
                       </span>
                     </label>
                   ))}
@@ -294,15 +296,15 @@ export default function CheckoutModal() {
               {/* Order Summary */}
               <div className="bg-gray-50 rounded-lg p-4">
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-gray-600">Subtotal:</span>
+                  <span className="text-gray-600">{checkoutContent?.form.subtotalLabel}</span>
                   <span className="font-semibold">${total.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-gray-600">Shipping:</span>
-                  <span className="font-semibold">Free</span>
+                  <span className="text-gray-600">{checkoutContent?.form.shippingLabel}</span>
+                  <span className="font-semibold">{checkoutContent?.form.freeShipping}</span>
                 </div>
                 <div className="border-t pt-2 flex justify-between items-center">
-                  <span className="font-bold text-gray-900">Total:</span>
+                  <span className="font-bold text-gray-900">{checkoutContent?.form.totalLabel}</span>
                   <span className="font-bold text-xl text-blue-600">${total.toLocaleString()}</span>
                 </div>
               </div>
@@ -313,7 +315,7 @@ export default function CheckoutModal() {
                 disabled={loading}
                 className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {loading ? 'Processing...' : 'Place Order'}
+                {loading ? checkoutContent?.form.processingButton : checkoutContent?.form.placeOrderButton}
               </button>
             </form>
           </div>

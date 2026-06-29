@@ -44,6 +44,64 @@ const DiscoverSchema = z.object({
   buttonText: z.string(),
 });
 
+const CartSchema = z.object({
+  title: z.string(),
+  emptyMessage: z.string(),
+  loadingMessage: z.string(),
+  totalLabel: z.string(),
+  checkoutButton: z.string(),
+});
+
+const FavoritesSchema = z.object({
+  title: z.string(),
+  emptyMessage: z.string(),
+  addToCartButton: z.string(),
+});
+
+const CheckoutSchema = z.object({
+  form: z.object({
+    title: z.string(),
+    personalInfo: z.string(),
+    shippingAddress: z.string(),
+    paymentMethod: z.string(),
+    placeOrderButton: z.string(),
+    processingButton: z.string(),
+    firstNamePlaceholder: z.string(),
+    lastNamePlaceholder: z.string(),
+    emailPlaceholder: z.string(),
+    phonePlaceholder: z.string(),
+    addressPlaceholder: z.string(),
+    cityPlaceholder: z.string(),
+    statePlaceholder: z.string(),
+    zipCodePlaceholder: z.string(),
+    creditCardLabel: z.string(),
+    debitCardLabel: z.string(),
+    upiLabel: z.string(),
+    codLabel: z.string(),
+    subtotalLabel: z.string(),
+    shippingLabel: z.string(),
+    totalLabel: z.string(),
+    freeShipping: z.string(),
+  }),
+  orderConfirmation: z.object({
+    title: z.string(),
+    description: z.string(),
+    totalLabel: z.string(),
+    continueButtonText: z.string(),
+  }),
+  congratulations: z.object({
+    title: z.string(),
+    description: z.string(),
+    thankYouMessage: z.string(),
+    orderIdLabel: z.string(),
+    totalAmountLabel: z.string(),
+    deliveryLabel: z.string(),
+    deliveryTime: z.string(),
+    doneButtonText: z.string(),
+  }),
+  validationMessage: z.string(),
+});
+
 const ContentSchema = z.object({
   Header: HeaderSchema,
   Hero: z.object({
@@ -57,12 +115,18 @@ const ContentSchema = z.object({
     menLatest: MenSchema.optional(),
   }),
   Discover: DiscoverSchema.optional(),
+  Cart: CartSchema.optional(),
+  Favorites: FavoritesSchema.optional(),
+  Checkout: CheckoutSchema.optional(),
 });
 
 type HeaderType = z.infer<typeof HeaderSchema>;
 type HeroType = z.infer<typeof HeroSchema>;
 type MenType = z.infer<typeof MenSchema>;
 type DiscoverType = z.infer<typeof DiscoverSchema>;
+type CartType = z.infer<typeof CartSchema>;
+type FavoritesType = z.infer<typeof FavoritesSchema>;
+type CheckoutType = z.infer<typeof CheckoutSchema>;
 type ContentType = z.infer<typeof ContentSchema>;
 const contentData = {
   "Header": {
@@ -125,10 +189,65 @@ const contentData = {
     "description1": "Explore our premium collection of men's fashion.",
     "description2": "From casual wear to formal suits, find your perfect style.",
     "buttonText": "Discover More"
+  },
+  "Cart": {
+    "title": "Shopping Cart",
+    "emptyMessage": "Your cart is empty",
+    "loadingMessage": "Loading products...",
+    "totalLabel": "Total:",
+    "checkoutButton": "Checkout"
+  },
+  "Favorites": {
+    "title": "My Favorites",
+    "emptyMessage": "No favorites yet",
+    "addToCartButton": "Add to Cart"
+  },
+  "Checkout": {
+    "form": {
+      "title": "Checkout",
+      "personalInfo": "Personal Information",
+      "shippingAddress": "Shipping Address",
+      "paymentMethod": "Payment Method",
+      "placeOrderButton": "Place Order",
+      "processingButton": "Processing...",
+      "firstNamePlaceholder": "First Name",
+      "lastNamePlaceholder": "Last Name",
+      "emailPlaceholder": "Email",
+      "phonePlaceholder": "Phone Number",
+      "addressPlaceholder": "Address",
+      "cityPlaceholder": "City",
+      "statePlaceholder": "State",
+      "zipCodePlaceholder": "Zip Code",
+      "creditCardLabel": "Credit Card",
+      "debitCardLabel": "Debit Card",
+      "upiLabel": "UPI",
+      "codLabel": "Cash on Delivery",
+      "subtotalLabel": "Subtotal:",
+      "shippingLabel": "Shipping:",
+      "totalLabel": "Total:",
+      "freeShipping": "Free"
+    },
+    "orderConfirmation": {
+      "title": "Order Placed!",
+      "description": "Thank you for your purchase. Your order has been confirmed and will be processed soon.",
+      "totalLabel": "Order Total",
+      "continueButtonText": "Continue Shopping"
+    },
+    "congratulations": {
+      "title": "🎉 Congratulations!",
+      "description": "Your order has been placed successfully",
+      "thankYouMessage": "We'll send you updates on your order status via email. Thank you for shopping with us!",
+      "orderIdLabel": "Order ID:",
+      "totalAmountLabel": "Total Amount:",
+      "deliveryLabel": "Expected Delivery:",
+      "deliveryTime": "5-7 Business Days",
+      "doneButtonText": "Done"
+    },
+    "validationMessage": "Please fill in all fields"
   }
 };
 
 export const content: ContentType = ContentSchema.parse(contentData);
 
-export { HeaderSchema, HeroSchema, MenSchema, DiscoverSchema, ContentSchema };
-export type { HeaderType, HeroType, MenType, DiscoverType, ContentType };
+export { HeaderSchema, HeroSchema, MenSchema, DiscoverSchema, CartSchema, FavoritesSchema, CheckoutSchema, ContentSchema };
+export type { HeaderType, HeroType, MenType, DiscoverType, CartType, FavoritesType, CheckoutType, ContentType };

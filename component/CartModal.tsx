@@ -5,11 +5,13 @@ import { X, Trash2, Plus, Minus } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { closeCart, removeFromCart, updateQuantity } from '@/slices/cartSlice';
 import { openCheckout } from '@/slices/checkoutSlice';
+import { content } from '@/data/componentDatas/content_context';
 import CheckoutModal from './CheckoutModal';
 
 export default function CartModal() {
   const dispatch = useAppDispatch();
   const { items, isOpen } = useAppSelector(state => state.cart);
+  const cartContent = content.Cart;
 
   const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
@@ -29,7 +31,7 @@ export default function CartModal() {
       }`}>
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-2xl font-bold">Shopping Cart</h2>
+          <h2 className="text-2xl font-bold">{cartContent?.title}</h2>
           <button
             onClick={() => dispatch(closeCart())}
             className="p-2 hover:bg-gray-100 rounded-lg"
@@ -42,7 +44,7 @@ export default function CartModal() {
         <div className="flex-1 overflow-y-auto p-6">
           {items.length === 0 ? (
             <div className="text-center text-gray-500 mt-12">
-              <p className="text-lg">Your cart is empty</p>
+              <p className="text-lg">{cartContent?.emptyMessage}</p>
             </div>
           ) : (
             <div className="space-y-4">
@@ -110,7 +112,7 @@ export default function CartModal() {
         {items.length > 0 && (
           <div className="border-t p-6 space-y-4">
             <div className="flex justify-between text-xl font-bold">
-              <span>Total:</span>
+              <span>{cartContent?.totalLabel}</span>
               <span>${total.toLocaleString()}</span>
             </div>
             <button
@@ -120,7 +122,7 @@ export default function CartModal() {
               }}
               className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
             >
-              Checkout
+              {cartContent?.checkoutButton}
             </button>
           </div>
         )}
