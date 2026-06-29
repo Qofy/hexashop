@@ -47,7 +47,7 @@ export default function MenProducts({
       {isError && (
         <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
           <p className="text-red-700 font-semibold">
-            Error loading products: {error?.message || 'Unknown error'}
+            Error loading products: {error instanceof Error ? error.message : 'Unknown error'}
           </p>
         </div>
       )}

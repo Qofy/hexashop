@@ -106,11 +106,11 @@ const CheckoutSchema = z.object({
 const ContentSchema = z.object({
   Header: HeaderSchema,
   Hero: z.object({
-    welcome: HeroSchema.optional(),
-    women: HeroSchema.optional(),
-    men: HeroSchema.optional(),
-    kids: HeroSchema.optional(),
-    accessories: HeroSchema.optional(),
+    welcome: HeroSchema,
+    women: HeroSchema,
+    men: HeroSchema,
+    kids: HeroSchema,
+    accessories: HeroSchema,
   }),
   Men: z.object({
     menLatest: MenSchema.optional(),

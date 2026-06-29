@@ -5,7 +5,6 @@ import { content } from "../data/componentDatas/content_context"
 export default function Hero() {
     const {Hero} = content
     const {welcome,women,men,kids,accessories} = Hero
-    console.log(welcome.btnText)
   return (
      <div className="grid grid-cols-4 grid-rows-12 gap-2 min-h-170 mt-10 mx-50 mb-10 text-white">
         {/* Home */}
