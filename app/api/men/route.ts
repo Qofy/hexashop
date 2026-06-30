@@ -133,6 +133,7 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category');
+    const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : undefined;
 
     let products: MenProduct[] = [];
 
@@ -156,6 +157,10 @@ export async function GET(request: NextRequest) {
           ...menCasualProducts,
           ...menTrendingProducts,
         ];
+    }
+
+    if (limit) {
+      products = products.slice(0, limit);
     }
 
     const validatedProducts = products.map(p => MenProductSchema.parse(p));
