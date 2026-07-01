@@ -66,7 +66,7 @@ export default function FavoritesModal() {
                     </div>
                     <div className="flex-1">
                       <h3 className="font-semibold text-sm">{item.clothName}</h3>
-                      <p className="text-blue-600 font-bold">₹{item.price}</p>
+                      <p className="text-blue-600 font-bold">${item.price}</p>
                       <div className="flex gap-1 mt-2">
                         {Array.from({ length: 5 }).map((_, i) => (
                           <span

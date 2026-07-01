@@ -59,6 +59,18 @@ const FavoritesSchema = z.object({
   addToCartButton: z.string(),
 });
 
+const WomenSchema = z.object({
+  loadingMessage: z.string(),
+  errorMessage: z.string(),
+  emptyMessage: z.string(),
+});
+
+const KidsSchema = z.object({
+  loadingMessage: z.string(),
+  errorMessage: z.string(),
+  emptyMessage: z.string(),
+});
+
 const CheckoutSchema = z.object({
   form: z.object({
     title: z.string(),
@@ -118,6 +130,8 @@ const ContentSchema = z.object({
   Discover: DiscoverSchema.optional(),
   Cart: CartSchema.optional(),
   Favorites: FavoritesSchema.optional(),
+  Women: WomenSchema.optional(),
+  Kids: KidsSchema.optional(),
   Checkout: CheckoutSchema.optional(),
 });
 
@@ -127,6 +141,8 @@ type MenType = z.infer<typeof MenSchema>;
 type DiscoverType = z.infer<typeof DiscoverSchema>;
 type CartType = z.infer<typeof CartSchema>;
 type FavoritesType = z.infer<typeof FavoritesSchema>;
+type WomenType = z.infer<typeof WomenSchema>;
+type KidsType = z.infer<typeof KidsSchema>;
 type CheckoutType = z.infer<typeof CheckoutSchema>;
 type ContentType = z.infer<typeof ContentSchema>;
 const contentData = {
@@ -204,6 +220,16 @@ const contentData = {
     "emptyMessage": "No favorites yet",
     "addToCartButton": "Add to Cart"
   },
+  "Women": {
+    "loadingMessage": "Loading products...",
+    "errorMessage": "Error loading products: ",
+    "emptyMessage": "No products found"
+  },
+  "Kids": {
+    "loadingMessage": "Loading products...",
+    "errorMessage": "Error loading products: ",
+    "emptyMessage": "No products found"
+  },
   "Checkout": {
     "form": {
       "title": "Checkout",
@@ -251,5 +277,5 @@ const contentData = {
 
 export const content: ContentType = ContentSchema.parse(contentData);
 
-export { HeaderSchema, HeroSchema, MenSchema, DiscoverSchema, CartSchema, FavoritesSchema, CheckoutSchema, ContentSchema };
-export type { HeaderType, HeroType, MenType, DiscoverType, CartType, FavoritesType, CheckoutType, ContentType };
+export { HeaderSchema, HeroSchema, MenSchema, DiscoverSchema, CartSchema, FavoritesSchema, WomenSchema, KidsSchema, CheckoutSchema, ContentSchema };
+export type { HeaderType, HeroType, MenType, DiscoverType, CartType, FavoritesType, WomenType, KidsType, CheckoutType, ContentType };

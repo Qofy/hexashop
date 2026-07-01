@@ -1,7 +1,7 @@
 import Hero from "@/component/Hero";
 import MenProducts from "@/component/men/MenProducts";
 import WomenProducts from "@/component/women/WomenProducts";
-
+import KidsProducts from "@/component/kids/KidsProducts";
 
 export default function HomePage() {
   return (
@@ -20,6 +20,11 @@ export default function HomePage() {
    description="Explore the latest trends in women fashion. 
    Explore our carefully curated collection of premium Elegant Dress, Classic Blouse, 
    and Stylish Cardigan designed for the modern man."/>
+  <KidsProducts title="Kids Latest" 
+  limit={4} 
+  description="Explore the latest trends in kids fashion. 
+   Explore our carefully curated collection of Deluxe kids jascket, Special Kids Dress, 
+   and Stylish Cardigan designed for the modern kids."/>
    </div>
    </>
   )

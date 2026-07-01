@@ -1,6 +1,6 @@
 'use client';
 
-import { useWomenProducts } from '@/data/mendata/useWomenProducts';
+import { useKidsProducts } from '@/data/mendata/useKidsProducts';
 import { content } from '@/data/componentDatas/content_context';
 import ProductCard from '../ProductCard';
 
@@ -11,17 +11,17 @@ type Props = {
   description?: string;
 };
 
-export default function WomenProducts({
+export default function KidsProducts({
   category = 'latest',
   limit,
   title,
   description,
 }: Props) {
-  const { data: products = [], isLoading, error, isError } = useWomenProducts(
+  const { data: products = [], isLoading, error, isError } = useKidsProducts(
     category,
     limit
   );
-  const womenContent = content.Women;
+  const kidsContent = content.Kids;
 
   return (
     <div className="py-12 px-6">
@@ -40,7 +40,7 @@ export default function WomenProducts({
         <div className="flex justify-center items-center py-12">
           <div className="text-center">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-            <p className="mt-4 text-gray-600">{womenContent?.loadingMessage}</p>
+            <p className="mt-4 text-gray-600">{kidsContent?.loadingMessage}</p>
           </div>
         </div>
       )}
@@ -49,7 +49,7 @@ export default function WomenProducts({
       {isError && (
         <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
           <p className="text-red-700 font-semibold">
-            {womenContent?.errorMessage}{error instanceof Error ? error.message : 'Unknown error'}
+            {kidsContent?.errorMessage}{error instanceof Error ? error.message : 'Unknown error'}
           </p>
         </div>
       )}
@@ -66,7 +66,7 @@ export default function WomenProducts({
       {/* Empty State */}
       {!isLoading && !isError && products.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-gray-500 text-lg">{womenContent?.emptyMessage}</p>
+          <p className="text-gray-500 text-lg">{kidsContent?.emptyMessage}</p>
         </div>
       )}
     </div>
