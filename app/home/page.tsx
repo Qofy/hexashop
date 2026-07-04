@@ -2,6 +2,7 @@ import Hero from "@/component/Hero";
 import MenProducts from "@/component/men/MenProducts";
 import WomenProducts from "@/component/women/WomenProducts";
 import KidsProducts from "@/component/kids/KidsProducts";
+import Explore from "@/component/Explore";
 
 export default function HomePage() {
   return (
@@ -26,6 +27,7 @@ export default function HomePage() {
    Explore our carefully curated collection of Deluxe kids jascket, Special Kids Dress, 
    and Stylish Cardigan designed for the modern kids."/>
    </div>
+   <Explore/>
    </>
   )
 };

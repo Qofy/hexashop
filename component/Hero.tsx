@@ -32,7 +32,7 @@ export default function Hero() {
           <div className=" flex flex-col  gap-1 px-6">
             <h1 className="text-2xl font-bold text-center">{women.overLayText} </h1>
             <p>{women.overLayPara}</p>
-            <Link href="/" className="border-2 border-amber-50 px-8 py-2 w-50">{women.btnText}</Link>
+            <Link href="/women" className="border-2 border-amber-50 px-8 py-2 w-50">{women.btnText}</Link>
             </div>
         </div>
 
@@ -46,7 +46,7 @@ export default function Hero() {
           <div className=" flex flex-col  gap-1 px-6">
             <h1 className="text-2xl font-bold text-center">{men.overLayText} </h1>
             <p>{men.overLayPara}</p>
-            <Link href="/" className="border-2 border-amber-50 px-8 py-2 w-50">{men.btnText}</Link>
+            <Link href="/men" className="border-2 border-amber-50 px-8 py-2 w-50">{men.btnText}</Link>
             </div>
         </div>
 
@@ -60,7 +60,7 @@ export default function Hero() {
           <div className=" flex flex-col  gap-1 px-6">
             <h1 className="text-2xl font-bold text-center">{kids.overLayText} </h1>
             <p>{kids.overLayPara}</p>
-            <Link href="/" className="border-2 border-amber-50 px-8 py-2 w-50">{kids.btnText}</Link>
+            <Link href="/kids" className="border-2 border-amber-50 px-8 py-2 w-50">{kids.btnText}</Link>
             </div>
         </div>
 
