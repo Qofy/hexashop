@@ -45,6 +45,38 @@ const DiscoverSchema = z.object({
   href: z.string(),
 });
 
+const ExploreSchema = z.object({
+  title: z.string(),
+  paragraph1: z.string(),
+  paragraph2: z.string(),
+  paragraph3: z.string(),
+  leatherBagsTitle: z.string(),
+  leatherBagsDescription: z.string(),
+  exploreMoreTitle: z.string(),
+  exploreMoreDescription: z.string(),
+});
+
+const FooterSchema = z.object({
+  shopName: z.string(),
+  address: z.string(),
+  email: z.string(),
+  phone: z.string(),
+  shoppingCategoriesTitle: z.string(),
+  menShopping: z.string(),
+  womenShopping: z.string(),
+  kidsShopping: z.string(),
+  usefulLinksTitle: z.string(),
+  homepage: z.string(),
+  aboutUs: z.string(),
+  help: z.string(),
+  contactUs: z.string(),
+  helpInformationTitle: z.string(),
+  faqs: z.string(),
+  shipping: z.string(),
+  trackingId: z.string(),
+  copyright: z.string(),
+});
+
 const CartSchema = z.object({
   title: z.string(),
   emptyMessage: z.string(),
@@ -115,6 +147,30 @@ const CheckoutSchema = z.object({
   validationMessage: z.string(),
 });
 
+const AboutUsSchema = z.object({
+  title: z.string(),
+  missionTitle: z.string(),
+  missionDescription: z.string(),
+  visionTitle: z.string(),
+  visionDescription: z.string(),
+  targetMarketTitle: z.string(),
+  targetMarketDescription: z.string(),
+  coreValuesTitle: z.string(),
+  coreValuesDescription: z.string(),
+  historyTitle: z.string(),
+  historyDescription: z.string(),
+});
+
+const ContactUsSchema = z.object({
+  title: z.string(),
+  salesTitle: z.string(),
+  salesDescription: z.string(),
+  salesLinkText: z.string(),
+  supportTitle: z.string(),
+  supportDescription: z.string(),
+  supportButtonText: z.string(),
+});
+
 const ContentSchema = z.object({
   Header: HeaderSchema,
   Hero: z.object({
@@ -128,22 +184,30 @@ const ContentSchema = z.object({
     menLatest: MenSchema.optional(),
   }),
   Discover: DiscoverSchema.optional(),
+  Explore: ExploreSchema.optional(),
+  Footer: FooterSchema.optional(),
   Cart: CartSchema.optional(),
   Favorites: FavoritesSchema.optional(),
   Women: WomenSchema.optional(),
   Kids: KidsSchema.optional(),
   Checkout: CheckoutSchema.optional(),
+  AboutUs: AboutUsSchema.optional(),
+  ContactUs: ContactUsSchema.optional(),
 });
 
 type HeaderType = z.infer<typeof HeaderSchema>;
 type HeroType = z.infer<typeof HeroSchema>;
 type MenType = z.infer<typeof MenSchema>;
 type DiscoverType = z.infer<typeof DiscoverSchema>;
+type ExploreType = z.infer<typeof ExploreSchema>;
+type FooterType = z.infer<typeof FooterSchema>;
 type CartType = z.infer<typeof CartSchema>;
 type FavoritesType = z.infer<typeof FavoritesSchema>;
 type WomenType = z.infer<typeof WomenSchema>;
 type KidsType = z.infer<typeof KidsSchema>;
 type CheckoutType = z.infer<typeof CheckoutSchema>;
+type AboutUsType = z.infer<typeof AboutUsSchema>;
+type ContactUsType = z.infer<typeof ContactUsSchema>;
 type ContentType = z.infer<typeof ContentSchema>;
 const contentData = {
   "Header": {
@@ -156,8 +220,8 @@ const contentData = {
   { label: "Men", href: "/men" },
   { label: "Women", href: "/women" },
   { label: "Kids", href: "/kids" },
-  { label: "About Us", href: "/about-us" },
-  { label: "Contact Us", href: "/contact-us" }
+  { label: "About Us", href: "/aboutUs" },
+  { label: "Contact Us", href: "/contactUs" }
 ],
   },
   "Hero":{
@@ -207,6 +271,36 @@ const contentData = {
     "description2": "From casual wear to formal suits, find your perfect style.",
     "buttonText": "Discover More",
     "href": "/men"
+  },
+  "Explore": {
+    "title": "Explore",
+    "paragraph1": "Discover our extensive collection of fashion items that cater to all your style needs. From trendy casual wear to elegant formal attire, we have something for everyone in the family.",
+    "paragraph2": "Our carefully curated selection features the latest fashion trends and timeless classics. Each piece is chosen to ensure quality, comfort, and style that will make you stand out.",
+    "paragraph3": "Whether you're shopping for yourself or your loved ones, our fashion collection offers incredible variety at unbeatable prices. Experience the best of fashion shopping with us today.",
+    "leatherBagsTitle": "Leather Bags",
+    "leatherBagsDescription": "Premium leather bags for every occasion",
+    "exploreMoreTitle": "Explore more fashion wears",
+    "exploreMoreDescription": "Browse through our complete collection of clothing and accessories. Find the perfect pieces that match your style and personality."
+  },
+  "Footer": {
+    "shopName": "HEXASHOP",
+    "address": "Lahore Road, Sheikhupura",
+    "email": "support@hexashop.com",
+    "phone": "+92 356 3656210",
+    "shoppingCategoriesTitle": "Shopping and Categories",
+    "menShopping": "Men's Shopping",
+    "womenShopping": "Women's Shopping",
+    "kidsShopping": "Kids Shopping",
+    "usefulLinksTitle": "Useful Links",
+    "homepage": "Homepage",
+    "aboutUs": "About Us",
+    "help": "Help",
+    "contactUs": "Contact Us",
+    "helpInformationTitle": "Help & Information",
+    "faqs": "FAQ's",
+    "shipping": "Shipping",
+    "trackingId": "Tracking Id",
+    "copyright": "Copyright © 2026 HEXASHOP. All rights reserved."
   },
   "Cart": {
     "title": "Shopping Cart",
@@ -272,10 +366,32 @@ const contentData = {
       "doneButtonText": "Done"
     },
     "validationMessage": "Please fill in all fields"
+  },
+  "AboutUs": {
+    "title": "About Us",
+    "missionTitle": "Mission Statement",
+    "missionDescription": "Our mission is to provide high-quality, affordable fashion to customers worldwide. We believe that everyone deserves to look and feel their best without breaking the bank. Through our carefully curated collections, we aim to make fashion accessible and enjoyable for all.",
+    "visionTitle": "Vision Statement",
+    "visionDescription": "We envision a world where fashion is inclusive, sustainable, and empowering. HEXASHOP aspires to be the leading online destination for fashion enthusiasts, offering trendy collections that celebrate individuality and self-expression.",
+    "targetMarketTitle": "Target Market Summary",
+    "targetMarketDescription": "Our primary audience includes fashion-conscious individuals aged 16-45 who value quality, style, and affordability. We serve men, women, and kids looking for the latest trends in casual, formal, and casual wear.",
+    "coreValuesTitle": "Core Values",
+    "coreValuesDescription": "Quality: We prioritize premium materials and excellent craftsmanship. Affordability: We believe great fashion shouldn't be expensive. Inclusivity: Fashion is for everyone, regardless of age, gender, or background. Sustainability: We're committed to ethical and environmentally responsible practices.",
+    "historyTitle": "Brief Company History",
+    "historyDescription": "HEXASHOP was founded with a simple vision: to democratize fashion and make it accessible to everyone. Starting as a small online boutique, we have grown into a trusted fashion retailer serving thousands of satisfied customers worldwide. Our journey has been driven by passion, innovation, and an unwavering commitment to customer satisfaction."
+  },
+  "ContactUs": {
+    "title": "Get In Touch",
+    "salesTitle": "Talk To Sales",
+    "salesDescription": "Have questions about our products or need help finding the perfect item? Our sales team is here to assist you. We're happy to provide personalized recommendations and help you discover what you're looking for.",
+    "salesLinkText": "View all global Members",
+    "supportTitle": "Contact Customer Support",
+    "supportDescription": "Need assistance with an order, returns, or have a general inquiry? Our dedicated customer support team is available to help you with any concerns or questions you may have about your shopping experience.",
+    "supportButtonText": "Customer Support"
   }
 };
 
 export const content: ContentType = ContentSchema.parse(contentData);
 
-export { HeaderSchema, HeroSchema, MenSchema, DiscoverSchema, CartSchema, FavoritesSchema, WomenSchema, KidsSchema, CheckoutSchema, ContentSchema };
-export type { HeaderType, HeroType, MenType, DiscoverType, CartType, FavoritesType, WomenType, KidsType, CheckoutType, ContentType };
+export { HeaderSchema, HeroSchema, MenSchema, DiscoverSchema, ExploreSchema, FooterSchema, CartSchema, FavoritesSchema, WomenSchema, KidsSchema, CheckoutSchema, AboutUsSchema, ContactUsSchema, ContentSchema };
+export type { HeaderType, HeroType, MenType, DiscoverType, ExploreType, FooterType, CartType, FavoritesType, WomenType, KidsType, CheckoutType, AboutUsType, ContactUsType, ContentType };

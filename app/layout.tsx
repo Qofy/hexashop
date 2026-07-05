@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Lora } from "next/font/google";
 import Header from "@/component/Header";
+import Footer from "@/component/Footer";
 import { Providers } from "./providers";
 
 const lora = Lora({
@@ -39,6 +40,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>
