@@ -25,7 +25,9 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
   const { id } = use(params);
   const productId = parseInt(id);
   const [product, setProduct] = useState<Product | null>(null);
-  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [relatedProducts1, setRelatedProducts1] = useState<Product[]>([]);
+  const [relatedProducts2, setRelatedProducts2] = useState<Product[]>([]);
+  const [relatedProducts3, setRelatedProducts3] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const favorites = useAppSelector((state: RootState) => state.favorites.items);
@@ -37,26 +39,44 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
         setLoading(true);
 
         // Determine category based on product ID
-        let category = 'men';
-        if (productId >= 41 && productId <= 80) category = 'women';
-        if (productId >= 81) category = 'kids';
+        let currentCategory = 'men';
+        if (productId >= 41 && productId <= 80) currentCategory = 'women';
+        if (productId >= 81) currentCategory = 'kids';
 
-        // Fetch all products from the category
-        const response = await fetch(`/api/${category}`);
-        const data = await response.json();
+        // Fetch current product from its category
+        const currentResponse = await fetch(`/api/${currentCategory}`);
+        const currentData = await currentResponse.json();
 
-        if (data.success && data.data) {
-          const products = data.data;
-          const currentProduct = products.find((p: Product) => p.id === productId);
+        if (currentData.success && currentData.data) {
+          const currentProducts = currentData.data;
+          const currentProduct = currentProducts.find((p: Product) => p.id === productId);
 
           if (currentProduct) {
             setProduct(currentProduct);
 
-            // Get related products (similar products from same category, excluding current)
-            const related = products
+            // Fetch products from all categories for mixed recommendations
+            const categories = ['men', 'women', 'kids'];
+            const allProducts: Product[] = [];
+
+            for (const category of categories) {
+              const response = await fetch(`/api/${category}`);
+              const data = await response.json();
+              if (data.success && data.data) {
+                allProducts.push(...data.data);
+              }
+            }
+
+            const availableProducts = allProducts
               .filter((p: Product) => p.id !== productId)
-              .slice(0, 4);
-            setRelatedProducts(related);
+              .sort(() => Math.random() - 0.5);
+
+            const mixedProducts1 = availableProducts.slice(0, 4);
+            const mixedProducts2 = availableProducts.slice(4, 8);
+            const mixedProducts3 = availableProducts.slice(8, 12);
+
+            setRelatedProducts1(mixedProducts1);
+            setRelatedProducts2(mixedProducts2);
+            setRelatedProducts3(mixedProducts3);
           } else {
             setError('Product not found');
           }
@@ -114,7 +134,10 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
           </div>
         </div>
 
-        <SimilarProducts products={relatedProducts} />
+        <SimilarProducts products={relatedProducts1} />
+        <SimilarProducts products={relatedProducts2} />
+        <SimilarProducts products={relatedProducts3} />
+
       </div>
     </div>
   );

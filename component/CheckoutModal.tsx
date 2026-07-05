@@ -10,7 +10,7 @@ import { FormEvent } from 'react';
 
 export default function CheckoutModal() {
   const dispatch = useAppDispatch();
-  const { isOpen, formData, loading, success, orderTotal, showCongratulations: showCongrats, orderId } = useAppSelector((state: RootState) => state.checkout);
+  const { isOpen, formData, loading, success, orderTotal, showCongratulations: showCongrats, orderId, trackingNumber } = useAppSelector((state: RootState) => state.checkout);
   const cartItems = useAppSelector((state: RootState) => state.cart.items);
   const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const checkoutContent = content.Checkout;
@@ -85,6 +85,10 @@ export default function CheckoutModal() {
               <div className="flex items-center justify-between">
                 <span className="text-gray-600">{checkoutContent?.congratulations.orderIdLabel}</span>
                 <span className="font-semibold text-gray-900">{orderId}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-600">{checkoutContent?.congratulations.trackingNumberLabel}</span>
+                <span className="font-semibold text-green-600">{trackingNumber}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray-600">{checkoutContent?.congratulations.totalAmountLabel}</span>

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Lora } from "next/font/google";
 import Header from "@/component/Header";
 import SubHeader from "@/component/SubHeader";
+import SecondaryNav from "@/component/SecondaryNav";
 import Footer from "@/component/Footer";
 import { Providers } from "./providers";
 
@@ -37,10 +38,11 @@ export default function RootLayout({
       lang="en"
       className={`${lora.variable} h-full antialiased`}
       >
-      <body className={` min-h-full flex flex-col pt-28`}>
+      <body className={` min-h-full flex flex-col pt-40`}>
         <Providers>
           <Header />
           <SubHeader />
+          <SecondaryNav />
           {children}
           <Footer />
         </Providers>

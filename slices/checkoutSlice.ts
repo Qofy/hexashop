@@ -14,6 +14,7 @@ export interface CheckoutForm {
 
 interface Order {
   id: string;
+  trackingNumber: string;
   date: string;
   total: number;
   items: number;
@@ -30,6 +31,7 @@ interface CheckoutState {
   orderTotal: number;
   showCongratulations: boolean;
   orderId: string;
+  trackingNumber: string;
   orderItemCount: number;
 }
 
@@ -43,6 +45,7 @@ const initialState: CheckoutState = {
   orderTotal: 0,
   showCongratulations: false,
   orderId: '',
+  trackingNumber: '',
   orderItemCount: 0,
 };
 
@@ -76,16 +79,24 @@ const checkoutSlice = createSlice({
       state.loading = false;
       state.success = true;
       state.orderTotal = action.payload;
-      state.orderId = `ORD-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+      state.orderId = `HEX-${new Date().getFullYear()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+      state.trackingNumber = `TRACK${Math.random().toString(36).slice(2, 14).toUpperCase()}`;
       state.formData = {};
       const order: Order = {
         id: state.orderId,
+        trackingNumber: state.trackingNumber,
         date: new Date().toLocaleDateString(),
         total: action.payload,
         items: state.orderItemCount,
         status: 'processing',
       };
       state.orders.push(order);
+
+      if (typeof window !== 'undefined') {
+        const existingOrders = JSON.parse(localStorage.getItem('hexashop_orders') || '[]');
+        existingOrders.push(order);
+        localStorage.setItem('hexashop_orders', JSON.stringify(existingOrders));
+      }
     },
     orderError: (state, action: PayloadAction<string>) => {
       state.loading = false;

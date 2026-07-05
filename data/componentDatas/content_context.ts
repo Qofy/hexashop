@@ -26,6 +26,13 @@ const SubHeaderSchema = z.object({
   message: z.string(),
 });
 
+const SecondaryNavSchema = z.object({
+  links: z.array(z.object({
+    label: z.string(),
+    href: z.string(),
+  })),
+});
+
 const HeroSchema = z.object({
   bgImage: ImageDataSchema,
   overLayText: z.string(),
@@ -143,6 +150,7 @@ const CheckoutSchema = z.object({
     description: z.string(),
     thankYouMessage: z.string(),
     orderIdLabel: z.string(),
+    trackingNumberLabel: z.string(),
     totalAmountLabel: z.string(),
     deliveryLabel: z.string(),
     deliveryTime: z.string(),
@@ -175,9 +183,22 @@ const ContactUsSchema = z.object({
   supportButtonText: z.string(),
 });
 
+const TrackingSchema = z.object({
+  title: z.string(),
+  searchLabel: z.string(),
+  searchPlaceholder: z.string(),
+  searchButton: z.string(),
+  orderStatusLabel: z.string(),
+  estimatedDelivery: z.string(),
+  trackingNumber: z.string(),
+  orderDate: z.string(),
+  noOrderMessage: z.string(),
+});
+
 const ContentSchema = z.object({
   Header: HeaderSchema,
   SubHeader: SubHeaderSchema,
+  SecondaryNav: SecondaryNavSchema,
   Hero: z.object({
     welcome: HeroSchema,
     women: HeroSchema,
@@ -198,10 +219,12 @@ const ContentSchema = z.object({
   Checkout: CheckoutSchema.optional(),
   AboutUs: AboutUsSchema.optional(),
   ContactUs: ContactUsSchema.optional(),
+  Tracking: TrackingSchema.optional(),
 });
 
 type HeaderType = z.infer<typeof HeaderSchema>;
 type SubHeaderType = z.infer<typeof SubHeaderSchema>;
+type SecondaryNavType = z.infer<typeof SecondaryNavSchema>;
 type HeroType = z.infer<typeof HeroSchema>;
 type MenType = z.infer<typeof MenSchema>;
 type DiscoverType = z.infer<typeof DiscoverSchema>;
@@ -214,6 +237,7 @@ type KidsType = z.infer<typeof KidsSchema>;
 type CheckoutType = z.infer<typeof CheckoutSchema>;
 type AboutUsType = z.infer<typeof AboutUsSchema>;
 type ContactUsType = z.infer<typeof ContactUsSchema>;
+type TrackingType = z.infer<typeof TrackingSchema>;
 type ContentType = z.infer<typeof ContentSchema>;
 const contentData = {
   "Header": {
@@ -232,6 +256,18 @@ const contentData = {
   },
   "SubHeader": {
     "message": "🎉 Free shipping on orders over $50! Use code SHIP50 at checkout"
+  },
+  "SecondaryNav": {
+    "links": [
+      { label: "Track Order", href: "/tracking" },
+      { label: "Purchase History", href: "/purchase-history" },
+      { label: "My Account", href: "/account" },
+      { label: "My Favorites", href: "/favorites" },
+      { label: "Support", href: "/support" },
+      { label: "Returns & Exchanges", href: "/returns" },
+      { label: "Size Guide", href: "/size-guide" },
+      { label: "Contact Us", href: "/contact-us" }
+    ]
   },
   "Hero":{
     "welcome":{
@@ -369,6 +405,7 @@ const contentData = {
       "description": "Your order has been placed successfully",
       "thankYouMessage": "We'll send you updates on your order status via email. Thank you for shopping with us!",
       "orderIdLabel": "Order ID:",
+      "trackingNumberLabel": "Tracking Number:",
       "totalAmountLabel": "Total Amount:",
       "deliveryLabel": "Expected Delivery:",
       "deliveryTime": "5-7 Business Days",
@@ -397,10 +434,21 @@ const contentData = {
     "supportTitle": "Contact Customer Support",
     "supportDescription": "Need assistance with an order, returns, or have a general inquiry? Our dedicated customer support team is available to help you with any concerns or questions you may have about your shopping experience.",
     "supportButtonText": "Customer Support"
+  },
+  "Tracking": {
+    "title": "Track Your Order",
+    "searchLabel": "Enter your Order ID",
+    "searchPlaceholder": "e.g., HEX-2024-001234",
+    "searchButton": "Track Order",
+    "orderStatusLabel": "Order Status",
+    "estimatedDelivery": "Estimated Delivery",
+    "trackingNumber": "Tracking Number",
+    "orderDate": "Order Date",
+    "noOrderMessage": "No order found. Please check your Order ID and try again."
   }
 };
 
 export const content: ContentType = ContentSchema.parse(contentData);
 
-export { HeaderSchema, SubHeaderSchema, HeroSchema, MenSchema, DiscoverSchema, ExploreSchema, FooterSchema, CartSchema, FavoritesSchema, WomenSchema, KidsSchema, CheckoutSchema, AboutUsSchema, ContactUsSchema, ContentSchema };
-export type { HeaderType, SubHeaderType, HeroType, MenType, DiscoverType, ExploreType, FooterType, CartType, FavoritesType, WomenType, KidsType, CheckoutType, AboutUsType, ContactUsType, ContentType };
+export { HeaderSchema, SubHeaderSchema, SecondaryNavSchema, HeroSchema, MenSchema, DiscoverSchema, ExploreSchema, FooterSchema, CartSchema, FavoritesSchema, WomenSchema, KidsSchema, CheckoutSchema, AboutUsSchema, ContactUsSchema, TrackingSchema, ContentSchema };
+export type { HeaderType, SubHeaderType, SecondaryNavType, HeroType, MenType, DiscoverType, ExploreType, FooterType, CartType, FavoritesType, WomenType, KidsType, CheckoutType, AboutUsType, ContactUsType, TrackingType, ContentType };
