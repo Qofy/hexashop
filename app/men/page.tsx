@@ -1,5 +1,8 @@
 import MenProducts from "@/component/men/MenProducts"
 
+
+
+
 // type Props = {}
 
 export default function Men() {
@@ -7,8 +10,10 @@ export default function Men() {
     <div>
       <MenProducts category="latest" title="Men's Latest"/>
       <MenProducts category="featured" title="Men's Featured"/>
+      
       <MenProducts category="casual" title="Casual"/>
       <MenProducts category="trending" title="Men's Trending"/>
+
     </div>
   )
 };

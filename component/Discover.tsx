@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { DiscoverType } from '@/data/componentDatas/content_context';
+import { DiscoverType,  } from '@/data/componentDatas/content_context';
 
 type Props = DiscoverType;
 
