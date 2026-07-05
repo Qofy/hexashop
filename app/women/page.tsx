@@ -1,7 +1,7 @@
 import WomenProducts from "@/component/women/WomenProducts"
 import Discover from "@/component/Discover"
-import executiveBlazer from "@/public/assets/men/featured/executive-blazer.jpg"
-import eliteBlazer from '@/public/assets/men/featured/elite-blazer.jpg'
+import l2 from "@/public/assets/kids/latest/l2.png"
+import f5 from '@/public/assets/kids/featured/f5.png'
 
 export default function Women() {
   return (
@@ -9,8 +9,8 @@ export default function Women() {
       <WomenProducts category="latest" title="Women's Latest"/>
       <WomenProducts category="featured" title="Women's Featured"/>
       <Discover 
-      image1={executiveBlazer} 
-      image2={eliteBlazer} 
+      image1={l2} 
+      image2={f5} 
       title="Men's Collection" 
       description1="Lorem ipsum dolor sit amet consectetur adipiscing elit. 
       Quisque faucibus ex sapien vitae pellentesque sem placerat. 
