@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { Star, ShoppingCart, Heart } from 'lucide-react';
 import { MenProduct } from '@/data/mendata/mendata';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -17,7 +18,8 @@ export default function ProductCard({ product }: Props) {
   const favorites = useAppSelector((state: RootState) => state.favorites.items);
   const isFavorited = favorites.some(item => item.id === product.id);
   return (
-    <div className="bg-header-bg w-74 shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <Link href={`/product/${product.id}`}>
+      <div className="bg-header-bg w-74 shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer">
       {/* Product Image */}
       <div className="relative w-full h-74 bg-gray-100">
         <Image
@@ -60,7 +62,9 @@ export default function ProductCard({ product }: Props) {
         </p>       
           <div className='flex gap-1.5'>
             <button
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 if (isFavorited) {
                   dispatch(removeFromFavorites(product.id));
                 } else {
@@ -80,7 +84,11 @@ export default function ProductCard({ product }: Props) {
               />
             </button>
             <button
-              onClick={() => dispatch(addToCart(product))}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dispatch(addToCart(product));
+              }}
               className='hover:bg-gray-100 p-1 rounded transition-colors'
               aria-label={`Add ${product.clothName} to cart`}
             >
@@ -122,6 +130,7 @@ export default function ProductCard({ product }: Props) {
           </button>
         </div> */}
       </div>
-    </div>
+      </div>
+    </Link>
   );
 }

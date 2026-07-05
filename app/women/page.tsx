@@ -21,7 +21,7 @@ export default function Women() {
        In id cursus mi pretium tellus duis convallis. 
        Tempus leo eu aenean sed diam urna tempor. 
        Pulvinar vivamus fringilla lacus nec metus bibendum egestas. "
-       href="/men"
+       href="/kids"
        buttonText="Discover more"/>
       <WomenProducts category="casual" title="Casual"/>
       <WomenProducts category="trending" title="Women's Trending"/>
