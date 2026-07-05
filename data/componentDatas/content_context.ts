@@ -22,6 +22,10 @@ const HeaderSchema = z.object({
   })),
 });
 
+const SubHeaderSchema = z.object({
+  message: z.string(),
+});
+
 const HeroSchema = z.object({
   bgImage: ImageDataSchema,
   overLayText: z.string(),
@@ -173,6 +177,7 @@ const ContactUsSchema = z.object({
 
 const ContentSchema = z.object({
   Header: HeaderSchema,
+  SubHeader: SubHeaderSchema,
   Hero: z.object({
     welcome: HeroSchema,
     women: HeroSchema,
@@ -196,6 +201,7 @@ const ContentSchema = z.object({
 });
 
 type HeaderType = z.infer<typeof HeaderSchema>;
+type SubHeaderType = z.infer<typeof SubHeaderSchema>;
 type HeroType = z.infer<typeof HeroSchema>;
 type MenType = z.infer<typeof MenSchema>;
 type DiscoverType = z.infer<typeof DiscoverSchema>;
@@ -223,6 +229,9 @@ const contentData = {
   { label: "About Us", href: "/aboutUs" },
   { label: "Contact Us", href: "/contactUs" }
 ],
+  },
+  "SubHeader": {
+    "message": "🎉 Free shipping on orders over $50! Use code SHIP50 at checkout"
   },
   "Hero":{
     "welcome":{
@@ -393,5 +402,5 @@ const contentData = {
 
 export const content: ContentType = ContentSchema.parse(contentData);
 
-export { HeaderSchema, HeroSchema, MenSchema, DiscoverSchema, ExploreSchema, FooterSchema, CartSchema, FavoritesSchema, WomenSchema, KidsSchema, CheckoutSchema, AboutUsSchema, ContactUsSchema, ContentSchema };
-export type { HeaderType, HeroType, MenType, DiscoverType, ExploreType, FooterType, CartType, FavoritesType, WomenType, KidsType, CheckoutType, AboutUsType, ContactUsType, ContentType };
+export { HeaderSchema, SubHeaderSchema, HeroSchema, MenSchema, DiscoverSchema, ExploreSchema, FooterSchema, CartSchema, FavoritesSchema, WomenSchema, KidsSchema, CheckoutSchema, AboutUsSchema, ContactUsSchema, ContentSchema };
+export type { HeaderType, SubHeaderType, HeroType, MenType, DiscoverType, ExploreType, FooterType, CartType, FavoritesType, WomenType, KidsType, CheckoutType, AboutUsType, ContactUsType, ContentType };
