@@ -11,7 +11,6 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         {/* Main Content */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Company Info */}
           <div>
             <h2 className="text-white font-bold text-lg mb-4">{footerContent?.shopName}</h2>
             <div className="space-y-3 text-sm">
@@ -30,7 +29,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Shopping and Categories */}
           <div>
             <h3 className="text-white font-bold text-lg mb-4">{footerContent?.shoppingCategoriesTitle}</h3>
             <ul className="space-y-2 text-sm">

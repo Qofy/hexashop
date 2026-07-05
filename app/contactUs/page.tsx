@@ -9,15 +9,12 @@ export default function ContactUs() {
   return (
     <div className="min-h-screen bg-gray-800 bg-cover bg-center pt-20" style={{ backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5))' }}>
       <div className="max-w-6xl mx-auto px-6">
-        {/* Page Title */}
         <h1 className="text-5xl font-bold text-center text-white mb-16">
           {contactContent?.title}
         </h1>
 
-        {/* Two Column Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
 
-          {/* Talk To Sales Card */}
           <div className="bg-white p-10 rounded-lg shadow-xl hover:shadow-2xl transition-shadow">
             <div className="flex justify-center mb-6">
               <Phone className="w-16 h-16 text-gray-800" strokeWidth={1.5} />
@@ -38,7 +35,6 @@ export default function ContactUs() {
             </div>
           </div>
 
-          {/* Contact Customer Support Card */}
           <div className="bg-white p-10 rounded-lg shadow-xl hover:shadow-2xl transition-shadow">
             <div className="flex justify-center mb-6">
               <Headphones className="w-16 h-16 text-gray-800" strokeWidth={1.5} />
