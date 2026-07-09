@@ -1,6 +1,5 @@
 'use client';
 
-import { Metadata } from "next";
 import { useState, useEffect, use } from 'react';
 import { useAppSelector } from '@/store/hooks';
 import type { RootState } from '@/store/store';
@@ -11,11 +10,6 @@ import SizeSelector from '@/component/product/SizeSelector';
 import ProductActions from '@/component/product/ProductActions';
 import ShippingInfo from '@/component/product/ShippingInfo';
 import SimilarProducts from '@/component/product/SimilarProducts';
-
-export const metadata: Metadata = {
-  title: "Product Details - HexaShop",
-  description: "View detailed product information, pricing, and similar items at HexaShop.",
-};
 
 type Product = {
   id: number;

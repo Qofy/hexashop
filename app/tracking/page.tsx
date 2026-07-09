@@ -1,6 +1,5 @@
 'use client';
 
-import { Metadata } from "next";
 import { Suspense, useState } from 'react';
 import { content } from '@/data/componentDatas/content_context';
 import TrackingHeader from '@/component/tracking/TrackingHeader';
@@ -9,11 +8,6 @@ import TrackingOrderDetails from '@/component/tracking/TrackingOrderDetails';
 import TrackingStatusTimeline from '@/component/tracking/TrackingStatusTimeline';
 import TrackingItemsInfo from '@/component/tracking/TrackingItemsInfo';
 import TrackingNoOrder from '@/component/tracking/TrackingNoOrder';
-
-export const metadata: Metadata = {
-  title: "Track Your Order - HexaShop",
-  description: "Track your HexaShop order in real-time. Enter your order ID to see shipping status and delivery information.",
-};
 import TrackingSampleOrders from '@/component/tracking/TrackingSampleOrders';
 
 type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered';

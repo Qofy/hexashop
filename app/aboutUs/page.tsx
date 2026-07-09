@@ -1,12 +1,6 @@
 'use client';
 
-import { Metadata } from "next";
 import { content } from '@/data/componentDatas/content_context';
-
-export const metadata: Metadata = {
-  title: "About Us - HexaShop",
-  description: "Learn more about HexaShop. Discover our story, mission, and commitment to quality fashion and customer service.",
-};
 
 export default function AboutUs() {
   const aboutContent = content.AboutUs;
