@@ -1,7 +1,13 @@
+import { Metadata } from "next";
 import KidsProducts from "@/component/kids/KidsProducts"
 import Discover from "@/component/Discover"
 import executiveBlazer from "@/public/assets/men/featured/executive-blazer.jpg"
 import eliteBlazer from '@/public/assets/men/featured/elite-blazer.jpg'
+
+export const metadata: Metadata = {
+  title: "Kids' Fashion - HexaShop",
+  description: "Shop quality clothing and accessories for kids. Find the latest and featured kids' fashion at great prices.",
+};
 
 export default function Kids() {
   return (

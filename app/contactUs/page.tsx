@@ -1,7 +1,13 @@
 'use client';
 
+import { Metadata } from "next";
 import { content } from '@/data/componentDatas/content_context';
 import { Phone, Headphones } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: "Contact Us - HexaShop",
+  description: "Get in touch with HexaShop's customer support team. Find contact information, phone numbers, and reach out to us with your inquiries.",
+};
 
 export default function ContactUs() {
   const contactContent = content.ContactUs;

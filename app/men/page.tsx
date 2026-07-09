@@ -1,12 +1,13 @@
+import { Metadata } from "next";
 import Discover from "@/component/Discover"
 import MenProducts from "@/component/men/MenProducts"
 import f1 from "@/public/assets/women/featured/f1.png"
 import tr2 from "@/public/assets/women/trending/tr2.png"
 
-
-
-
-// type Props = {}
+export const metadata: Metadata = {
+  title: "Men's Fashion - HexaShop",
+  description: "Shop the latest men's fashion and accessories. Explore our collection of casual wear, formal wear, and trending styles.",
+};
 
 export default function Men() {
   return (

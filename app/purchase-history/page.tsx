@@ -1,11 +1,17 @@
 'use client';
 
+import { Metadata } from "next";
 import { useState, useEffect, startTransition } from 'react';
 import PurchaseHistoryHeader from '@/component/purchase-history/PurchaseHistoryHeader';
 import PurchaseHistorySortControls from '@/component/purchase-history/PurchaseHistorySortControls';
 import PurchaseHistoryTable from '@/component/purchase-history/PurchaseHistoryTable';
 import PurchaseHistoryCards from '@/component/purchase-history/PurchaseHistoryCards';
 import PurchaseHistoryEmpty from '@/component/purchase-history/PurchaseHistoryEmpty';
+
+export const metadata: Metadata = {
+  title: "Purchase History - HexaShop",
+  description: "View all your previous orders and purchases at HexaShop. Track order details and status.",
+};
 
 type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered';
 

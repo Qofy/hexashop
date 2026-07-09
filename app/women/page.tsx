@@ -1,7 +1,13 @@
+import { Metadata } from "next";
 import WomenProducts from "@/component/women/WomenProducts"
 import Discover from "@/component/Discover"
 import l2 from "@/public/assets/kids/latest/l2.png"
 import f5 from '@/public/assets/kids/featured/f5.png'
+
+export const metadata: Metadata = {
+  title: "Women's Fashion - HexaShop",
+  description: "Discover stylish women's fashion and accessories. Browse our collection of latest trends, featured items, and exclusive styles.",
+};
 
 export default function Women() {
   return (
