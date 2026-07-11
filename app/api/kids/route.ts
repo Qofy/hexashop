@@ -59,13 +59,13 @@ const KidsProductSchema = z.object({
     height: z.number(),
     width: z.number(),
     blurDataURL: z.string().optional(),
-  }),
+  }).passthrough(),
   clothName: z.string(),
   price: z.number(),
   starRate: z.number().min(0).max(5),
   inCart: z.boolean().default(false),
   isFavorite: z.boolean().default(false),
-});
+}).passthrough();
 
 type KidsProduct = z.infer<typeof KidsProductSchema>;
 
