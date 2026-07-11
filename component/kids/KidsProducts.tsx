@@ -24,13 +24,13 @@ export default function KidsProducts({
   const kidsContent = content.Kids;
 
   return (
-    <div className="py-12 px-6">
+    <div className="py-6 md:py-12 px-4 md:px-6">
       {/* Header */}
       {(title || description) && (
-        <div className="mb-8">
-          {title && <h2 className="text-4xl font-bold text-gray-900">{title}</h2>}
+        <div className="mb-6 md:mb-8">
+          {title && <h2 className="text-2xl md:text-4xl font-bold text-gray-900">{title}</h2>}
           {description && (
-            <p className="text-gray-600 mt-2 max-w-2xl">{description}</p>
+            <p className="text-sm md:text-base text-gray-600 mt-1 md:mt-2 max-w-2xl">{description}</p>
           )}
         </div>
       )}
