@@ -22,7 +22,7 @@ const MenProductSchema = z.object({
 export type MenProduct = z.infer<typeof MenProductSchema>;
 
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
+  baseURL: '/',
   timeout: 10000,
 });
 
