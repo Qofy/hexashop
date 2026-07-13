@@ -84,7 +84,7 @@ export default function SizeChartSection() {
           </thead>
           <tbody>
             {currentChart.sizes.map((row, idx) => (
-              <tr key={idx} className={`border-b border-gray-200 ${idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+              <tr key={`size-${row.size}-${idx}`} className={`border-b border-gray-200 ${idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
                 <td className="px-2 md:px-4 py-3 font-semibold text-gray-900">{row.size}</td>
                 {Object.entries(row).map(([key, value]) => {
                   if (key === 'size') return null;

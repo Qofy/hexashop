@@ -1,4 +1,4 @@
-import { Tape } from 'lucide-react';
+import { Ruler } from 'lucide-react';
 
 export default function MeasurementGuideSection() {
   const steps = [
@@ -31,13 +31,13 @@ export default function MeasurementGuideSection() {
   return (
     <div>
       <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 md:mb-8 flex items-center gap-3">
-        <Tape size={28} className="text-purple-600" />
+        <Ruler size={28} className="text-purple-600" />
         How to Measure
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         {steps.map((step, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-md p-5 md:p-6 border-l-4 border-purple-600">
+          <div key={`${step.title}-${index}`} className="bg-white rounded-lg shadow-md p-5 md:p-6 border-l-4 border-purple-600">
             <div className="flex items-start gap-3 md:gap-4">
               <div className="bg-purple-100 text-purple-600 rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center font-bold flex-shrink-0 text-sm md:text-base">
                 {index + 1}
