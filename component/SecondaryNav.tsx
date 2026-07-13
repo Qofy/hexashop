@@ -7,7 +7,7 @@ export default function SecondaryNav() {
   const { links } = content.SecondaryNav;
 
   return (
-    <nav className="fixed top-16 md:top-20 left-0 z-30 w-full bg-white border-b border-gray-200 shadow-sm">
+    <nav className="fixed top-24 md:top-28 left-0 z-30 w-full bg-white border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-3 md:px-6">
         <div className="flex items-center justify-center gap-2 md:gap-8 py-2 md:py-3 flex-wrap">
           {links.map((link, index) => (
