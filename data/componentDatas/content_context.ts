@@ -262,7 +262,7 @@ const contentData = {
       { label: "Track Order", href: "/tracking" },
       { label: "Purchase History", href: "/purchase-history" },
       { label: "My Account", href: "/my-account" },
-      { label: "My Favorites", href: "/favorites" },
+      { label: "My Favorites", href: "/my-favorites" },
       { label: "Support", href: "/support" },
       { label: "Returns & Exchanges", href: "/returns" },
       { label: "Size Guide", href: "/size-guide" },
