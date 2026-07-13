@@ -251,7 +251,7 @@ const contentData = {
   { label: "Women", href: "/women" },
   { label: "Kids", href: "/kids" },
   { label: "About Us", href: "/aboutUs" },
-  { label: "Contact Us", href: "/contactUs" }
+  { label: "Contact Us", href: "/contactUs" },
 ],
   },
   "SubHeader": {
@@ -261,7 +261,7 @@ const contentData = {
     "links": [
       { label: "Track Order", href: "/tracking" },
       { label: "Purchase History", href: "/purchase-history" },
-      { label: "My Account", href: "/account" },
+      { label: "My Account", href: "/my-account" },
       { label: "My Favorites", href: "/favorites" },
       { label: "Support", href: "/support" },
       { label: "Returns & Exchanges", href: "/returns" },
