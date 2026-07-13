@@ -6,7 +6,7 @@ export default function Hero() {
     const {Hero} = content
     const {welcome,women,men,kids,accessories} = Hero || {}
   return (
-     <div className="grid grid-cols-1 pt-24 md:pt-20 md:grid-cols-2 lg:grid-cols-4 gap-1 md:gap-2 min-h-screen md:min-h-150 lg:min-h-170 mt-4 md:mt-6 lg:mt-10 mx-4 md:mx-8 lg:mx-50 mb-4 md:mb-6 lg:mb-10 text-white">
+     <div className="grid grid-cols-1 pt-15 md:pt-20 md:grid-cols-2 lg:grid-cols-4 gap-1 md:gap-2 min-h-screen md:min-h-150 lg:min-h-170 mt-4 md:mt-6 lg:mt-10 mx-4 md:mx-8 lg:mx-50 mb-4 md:mb-6 lg:mb-10 text-white">
         {/* Home */}
         <div style={{backgroundImage:` linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),url(${welcome.bgImage.src})`,
         backgroundRepeat:"no-repeat",
