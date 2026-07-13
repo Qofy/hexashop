@@ -266,7 +266,6 @@ const contentData = {
       { label: "Support", href: "/support" },
       { label: "Returns & Exchanges", href: "/returns" },
       { label: "Size Guide", href: "/size-guide" },
-      { label: "Contact Us", href: "/contact-us" }
     ]
   },
   "Hero":{
