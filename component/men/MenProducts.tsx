@@ -35,18 +35,18 @@ export default function MenProducts({
 
       {/* Loading State */}
       {isLoading && (
-        <div className="flex justify-center items-center h-64">
+        <div className="flex justify-center items-center h-40 md:h-64">
           <div className="text-center">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-            <p className="mt-4 text-gray-600">Loading products...</p>
+            <p className="mt-4 text-sm md:text-base text-gray-600">Loading products...</p>
           </div>
         </div>
       )}
 
       {/* Error State */}
       {isError && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-          <p className="text-red-700 font-semibold">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 md:p-6 text-center">
+          <p className="text-sm md:text-base text-red-700 font-semibold">
             Error loading products: {error instanceof Error ? error.message : 'Unknown error'}
           </p>
         </div>
@@ -54,7 +54,7 @@ export default function MenProducts({
 
       {/* Products Grid */}
       {!isLoading && !isError && products.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
           {products.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -63,8 +63,8 @@ export default function MenProducts({
 
       {/* Empty State */}
       {!isLoading && !isError && products.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-600 text-lg">No products found</p>
+        <div className="text-center py-6 md:py-12">
+          <p className="text-sm md:text-lg text-gray-600">No products found</p>
         </div>
       )}
     </div>

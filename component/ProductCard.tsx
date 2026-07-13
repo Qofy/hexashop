@@ -19,9 +19,9 @@ export default function ProductCard({ product }: Props) {
   const isFavorited = favorites.some(item => item.id === product.id);
   return (
     <Link href={`/product/${product.id}`}>
-      <div className="bg-header-bg w-74 shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer">
+      <div className="bg-header-bg w-full shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer">
       {/* Product Image */}
-      <div className="relative w-full h-74 bg-gray-100">
+      <div className="relative w-full h-40 sm:h-48 md:h-56 lg:h-64 bg-gray-100">
         <Image
           src={product.image.src}
           alt={product.clothName}
@@ -31,33 +31,33 @@ export default function ProductCard({ product }: Props) {
       </div>
 
       {/* Product Info */}
-      <div className="p-4 h-30">
-        <div className='flex  items-center justify-between'>
-        <h3 className="font-semibold text-gray-800 truncate">
+      <div className="p-3 sm:p-4 md:p-5">
+        <div className='flex  items-center justify-between gap-2'>
+        <h3 className="font-semibold text-xs sm:text-sm md:text-base text-gray-800 truncate">
           {product.clothName}
         </h3>
         {/* Star Rating */}
-           <div className="flex items-center gap-1 mt-1">
+           <div className="flex items-center gap-0.5 sm:gap-1 mt-1 shrink-0">
           {Array.from({ length: 5 }).map((_, i) => (
             <Star
               key={i}
-              size={12}
-              className={
+              size={10}
+              className={`${
                 i < Math.round(product.starRate)
                   ? 'fill-yellow-400 text-yellow-400'
                   : 'text-gray-300'
-              }
+              }`}
             />
           ))}
-          <span className="text-sm text-gray-600 ml-1">
+          <span className="text-xs text-gray-600 ml-0.5">
             ({product.starRate})
           </span>
         </div>
         </div>
 
         {/* Price */}
-        <div className='flex justify-between items-center mt-4'>
-        <p className="font-bold text-gray-900 mt-2">
+        <div className='flex justify-between items-center mt-2 sm:mt-3 md:mt-4'>
+        <p className="font-bold text-sm sm:text-base md:text-lg text-gray-900">
           ${product.price}
         </p>       
           <div className='flex gap-1.5'>
