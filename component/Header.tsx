@@ -1,9 +1,10 @@
 'use client';
 
+import { useState } from "react"
 import Image from "next/image"
 import { content } from "../data/componentDatas/content_context"
 import Link from "next/link"
-import { ShoppingCart, Heart } from "lucide-react"
+import { ShoppingCart, Heart, Menu, X } from "lucide-react"
 import { useAppDispatch, useAppSelector } from "@/store/hooks"
 import { openCart, closeCart } from "@/slices/cartSlice"
 import { openFavorites, closeFavorites } from "@/slices/favoritesSlice"
@@ -12,6 +13,7 @@ import FavoritesModal from "./FavoritesModal"
 import type { RootState } from "@/store/store"
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const dispatch = useAppDispatch()
   const cartItems = useAppSelector((state: RootState) => state.cart.items)
   const favItems = useAppSelector((state: RootState) => state.favorites.items)
@@ -35,11 +37,22 @@ export default function Header() {
             </div>
         </div>
         <div className="flex gap-2 md:gap-6.5 items-center">
-    {Header.nav.map((nav) => (
-     <Link href={nav.href} key={nav.href} className="hidden md:block text-sm md:text-base hover:text-blue-600 transition-colors">
-     {nav.label}
-   </Link>
- ))}
+          {/* Desktop Navigation */}
+          {Header.nav.map((nav) => (
+            <Link href={nav.href} key={nav.href} className="hidden md:block text-sm md:text-base hover:text-blue-600 transition-colors">
+              {nav.label}
+            </Link>
+          ))}
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-1.5 hover:bg-gray-200 bg-gray-50 rounded-full transition-colors"
+            aria-label="Toggle navigation menu"
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
           <button
             onClick={() => {
               dispatch(openFavorites());
@@ -72,6 +85,25 @@ export default function Header() {
             )}
           </button>
         </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMenuOpen && (
+        <nav className="absolute top-16 md:top-20 left-0 right-0 bg-header-bg border-b border-gray-200 shadow-lg md:hidden z-40">
+          <div className="flex flex-col py-2">
+            {Header.nav.map((nav) => (
+              <Link
+                href={nav.href}
+                key={nav.href}
+                className="px-4 md:px-8 py-3 text-sm hover:bg-gray-100 transition-colors text-text-color"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {nav.label}
+              </Link>
+            ))}
+          </div>
+        </nav>
+      )}
+
       <FavoritesModal />
       <CartModal />
     </header>
