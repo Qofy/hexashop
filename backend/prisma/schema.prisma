@@ -1,0 +1,153 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+// ===== USER MODEL =====
+// Stores user account information
+model User {
+  id            String    @id @default(cuid())    // Unique ID
+  email         String    @unique                  // Must be unique
+  password      String                             // Hashed password
+  firstName     String
+  lastName      String
+  phone         String?                            // Optional (?)
+  avatar        String?                            // S3 URL
+  
+  // Relations to other tables
+  addresses     Address[]                          // User can have many addresses
+  orders        Order[]                            // User can have many orders
+  favorites     Favorite[]                         // User can have many favorites
+  cart          Cart?                              // User has one cart
+  
+  createdAt     DateTime  @default(now())          // Auto-set to current time
+  updatedAt     DateTime  @updatedAt               // Auto-update on change
+}
+
+// ===== PRODUCT MODEL =====
+// Stores product information
+model Product {
+  id            String    @id @default(cuid())
+  name          String
+  price         Float                              // In USD
+  category      String                             // men, women, kids
+  description   String?
+  image         String                             // S3 URL
+  starRate      Float     @default(0)              // 0-5 rating
+  inStock       Boolean   @default(true)
+  
+  // Relations
+  orderItems    OrderItem[]                        // Product in many orders
+  favorites     Favorite[]                         // Product in many favorites
+  cartItems     CartItem[]                         // Product in many carts
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// ===== ORDER MODEL =====
+// Stores customer orders
+model Order {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  orderNumber   String    @unique                  // e.g., HEX-2024-001
+  status        String    @default("pending")      // pending, processing, shipped, delivered
+  totalAmount   Float
+  shippingCost  Float
+  
+  // Relations
+  items         OrderItem[]                        // Order contains items
+  shippingAddr  Address?                           // Shipping address
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// ===== ORDER ITEM MODEL =====
+// Junction table: connects Order to Product
+model OrderItem {
+  id            String    @id @default(cuid())
+  orderId       String
+  order         Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  productId     String
+  product       Product   @relation(fields: [productId], references: [id])
+  
+  quantity      Int                                // How many of this product
+  price         Float                              // Price at time of purchase
+}
+
+// ===== CART MODEL =====
+// Shopping cart for logged-in users
+model Cart {
+  id            String    @id @default(cuid())
+  userId        String    @unique                  // One cart per user
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  items         CartItem[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// ===== CART ITEM MODEL =====
+// Junction table: connects Cart to Product
+model CartItem {
+  id            String    @id @default(cuid())
+  cartId        String
+  cart          Cart      @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  
+  productId     String
+  product       Product   @relation(fields: [productId], references: [id])
+  
+  quantity      Int                                // Quantity in cart
+}
+
+// ===== FAVORITE MODEL =====
+// Wishlist/favorites for users
+model Favorite {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  productId     String
+  product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, productId])                    // User can't favorite same product twice
+  createdAt     DateTime  @default(now())
+}
+
+// ===== ADDRESS MODEL =====
+// Shipping/billing addresses
+model Address {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Shipping address for orders (one-to-one relationship)
+  orderId       String?   @unique                   // Optional (not every address is used for orders)
+  order         Order?    @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  
+  label         String                              // home, work, shipping, billing
+  street        String
+  city          String
+  state         String
+  zipCode       String
+  country       String
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
