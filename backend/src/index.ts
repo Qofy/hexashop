@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import {PrismaClient} from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 import path from 'path';
+import { AppError } from './middleware/errorHandlers';
 // import { error } from 'console';
 
 dotenv.config()
@@ -53,10 +54,10 @@ app.use((req:Request, res:Response)=>{
 });
 
 // Global error handler
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error|AppError, req: Request, res: Response, next: NextFunction) => {
   console.error('Error:', err);
 
-  const status = err.status || 500;
+  const status = err instanceof AppError ? err.statusCode : 500;
   const message = err.message || 'Internal Server Error';
 
   res.status(status).json({

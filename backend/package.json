@@ -12,6 +12,8 @@
   "scripts": {
     "dev": "bun src/index.ts",
     "start": "bun src/index.ts",
+    "build": "tsc",
+    "prisma:generate": "bunx prisma generate",
     "prisma:migrate": "bunx prisma migrate dev",
     "prisma:studio": "bunx prisma studio"
   },
