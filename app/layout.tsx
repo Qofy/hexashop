@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Lora } from "next/font/google";
+import { Inter } from "next/font/google";
 import Header from "@/component/Header";
 import SubHeader from "@/component/SubHeader";
 import SecondaryNav from "@/component/SecondaryNav";
 import Footer from "@/component/Footer";
 import { Providers } from "./providers";
 
-const lora = Lora({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-lora-san',
+  variable: '--font-inter',
 })
 
 // const geistSans = Geist({
@@ -36,9 +36,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${lora.variable} h-full antialiased`}
+      className={`${inter.variable} h-full antialiased`}
       >
-      <body className={` min-h-full flex flex-col pt-40`}>
+      <body className={`min-h-full flex flex-col pt-40 md:pt-40`}>
         <Providers>
           <Header />
           <SubHeader />
