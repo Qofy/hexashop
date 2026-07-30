@@ -8,8 +8,8 @@ import Container from "./Container";
 
 interface ExploreCardProps {
   bgImage: string;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   colSpan: string;
   rowSpan: string;
   minHeight: string;
@@ -33,8 +33,8 @@ function ExploreCard({
       }}
       className={`${colSpan} ${rowSpan} ${minHeight} flex flex-col items-center justify-center text-white text-center`}
     >
-      <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-2 px-4">{title}</h3>
-      <p className="text-sm md:text-base opacity-90 px-4">{description}</p>
+      {title && <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-2 px-4">{title}</h3>}
+      {description && <p className="text-sm md:text-base opacity-90 px-4">{description}</p>}
     </div>
   );
 }
