@@ -156,11 +156,13 @@ export class ProductController {
   // GET /api/products - Get all products
   static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const { category, limit, page = 1 } = req.query;
-      const skip = (Number(page) - 1) * (Number(limit) || 20);
+      const category = Array.isArray(req.query.category) ? req.query.category[0] : req.query.category;
+      const limit = Array.isArray(req.query.limit) ? req.query.limit[0] : req.query.limit;
+      const page = Array.isArray(req.query.page) ? Number(req.query.page[0]) : Number(req.query.page) || 1;
+      const skip = (page - 1) * (Number(limit) || 20);
 
       const result = await ProductService.getAllProducts(
-        category as string | undefined,
+        category,
         limit ? Number(limit) : undefined,
         skip
       );
@@ -200,8 +202,9 @@ export class ProductController {
   static async getByCategory(req: Request, res: Response, next: NextFunction) {
     try {
       const { category } = req.params;
-      const { limit, page = 1 } = req.query;
-      const skip = (Number(page) - 1) * (Number(limit) || 20);
+      const limit = Array.isArray(req.query.limit) ? req.query.limit[0] : req.query.limit;
+      const page = Array.isArray(req.query.page) ? Number(req.query.page[0]) : Number(req.query.page) || 1;
+      const skip = (page - 1) * (Number(limit) || 20);
 
       const products = await ProductService.getProductsByCategory(
         category,

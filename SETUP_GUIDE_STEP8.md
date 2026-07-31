@@ -252,7 +252,7 @@ export class CartController {
   static async getCart(req: AuthRequest, res: Response, next: NextFunction) {
     try {
       // For now, use a test userId from query
-      const userId = req.query.userId as string || 'test-user-123';
+      const userId = (Array.isArray(req.query.userId) ? req.query.userId[0] : req.query.userId) || 'test-user-123';
 
       const cart = await CartService.getCart(userId);
 
@@ -268,7 +268,7 @@ export class CartController {
   // POST /api/cart/items - Add item to cart
   static async addToCart(req: AuthRequest, res: Response, next: NextFunction) {
     try {
-      const userId = req.query.userId as string || 'test-user-123';
+      const userId = (Array.isArray(req.query.userId) ? req.query.userId[0] : req.query.userId) || 'test-user-123';
       const { productId, quantity = 1 } = req.body;
 
       if (!productId) {
@@ -299,7 +299,7 @@ export class CartController {
   // PUT /api/cart/items/:id - Update cart item
   static async updateCartItem(req: AuthRequest, res: Response, next: NextFunction) {
     try {
-      const userId = req.query.userId as string || 'test-user-123';
+      const userId = (Array.isArray(req.query.userId) ? req.query.userId[0] : req.query.userId) || 'test-user-123';
       const { id } = req.params;
       const { quantity } = req.body;
 
@@ -324,7 +324,7 @@ export class CartController {
   // DELETE /api/cart/items/:id - Remove item from cart
   static async removeFromCart(req: AuthRequest, res: Response, next: NextFunction) {
     try {
-      const userId = req.query.userId as string || 'test-user-123';
+      const userId = (Array.isArray(req.query.userId) ? req.query.userId[0] : req.query.userId) || 'test-user-123';
       const { id } = req.params;
 
       const result = await CartService.removeFromCart(userId, id);
@@ -341,7 +341,7 @@ export class CartController {
   // DELETE /api/cart - Clear entire cart
   static async clearCart(req: AuthRequest, res: Response, next: NextFunction) {
     try {
-      const userId = req.query.userId as string || 'test-user-123';
+      const userId = (Array.isArray(req.query.userId) ? req.query.userId[0] : req.query.userId) || 'test-user-123';
 
       const result = await CartService.clearCart(userId);
 
@@ -357,7 +357,7 @@ export class CartController {
   // GET /api/cart/total - Get cart total
   static async getCartTotal(req: AuthRequest, res: Response, next: NextFunction) {
     try {
-      const userId = req.query.userId as string || 'test-user-123';
+      const userId = (Array.isArray(req.query.userId) ? req.query.userId[0] : req.query.userId) || 'test-user-123';
 
       const total = await CartService.getCartTotal(userId);
 
