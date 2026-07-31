@@ -60,7 +60,7 @@ export default function Shipping() {
   return (
     <Section bgColor="bg-white" padding="md">
       <Container>
-        <div className="h-6 md:h-8"></div>
+        <div className="h-10 md:h-8"></div>
 
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
