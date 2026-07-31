@@ -195,6 +195,19 @@ const TrackingSchema = z.object({
   noOrderMessage: z.string(),
 });
 
+const FAQSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  items: z.array(z.object({
+    id: z.number(),
+    question: z.string(),
+    answer: z.string(),
+  })),
+  contactTitle: z.string(),
+  contactDescription: z.string(),
+  contactButtonText: z.string(),
+});
+
 const ContentSchema = z.object({
   Header: HeaderSchema,
   SubHeader: SubHeaderSchema,
@@ -220,6 +233,7 @@ const ContentSchema = z.object({
   AboutUs: AboutUsSchema.optional(),
   ContactUs: ContactUsSchema.optional(),
   Tracking: TrackingSchema.optional(),
+  FAQs: FAQSchema.optional(),
 });
 
 type HeaderType = z.infer<typeof HeaderSchema>;
@@ -238,6 +252,7 @@ type CheckoutType = z.infer<typeof CheckoutSchema>;
 type AboutUsType = z.infer<typeof AboutUsSchema>;
 type ContactUsType = z.infer<typeof ContactUsSchema>;
 type TrackingType = z.infer<typeof TrackingSchema>;
+type FAQType = z.infer<typeof FAQSchema>;
 type ContentType = z.infer<typeof ContentSchema>;
 const contentData = {
   "Header": {
@@ -444,10 +459,59 @@ const contentData = {
     "trackingNumber": "Tracking Number",
     "orderDate": "Order Date",
     "noOrderMessage": "No order found. Please check your Order ID and try again."
+  },
+  "FAQs": {
+    "title": "Frequently Asked Questions",
+    "description": "Find answers to common questions about our products, shipping, returns, and more.",
+    "items": [
+      {
+        "id": 1,
+        "question": "What is your return policy?",
+        "answer": "We offer a 30-day return policy on all items. If you're not satisfied with your purchase, you can return it within 30 days for a full refund or exchange. Items must be unused and in original packaging."
+      },
+      {
+        "id": 2,
+        "question": "How long does shipping take?",
+        "answer": "Standard shipping typically takes 5-7 business days. We also offer expedited shipping (2-3 business days) and express shipping (1 business day) for an additional fee. Orders are processed within 24 hours of purchase."
+      },
+      {
+        "id": 3,
+        "question": "Do you ship internationally?",
+        "answer": "Yes, we ship to over 100 countries worldwide. International shipping times vary from 7-21 business days depending on the destination. Customs and duties are the responsibility of the customer."
+      },
+      {
+        "id": 4,
+        "question": "How can I track my order?",
+        "answer": "Once your order ships, you'll receive a tracking number via email. You can use this number to track your package on our website or on the carrier's website."
+      },
+      {
+        "id": 5,
+        "question": "Do you offer gift wrapping?",
+        "answer": "Yes, we offer complimentary gift wrapping for all orders. Simply select the gift wrapping option at checkout, and we'll beautifully wrap your items for no extra charge."
+      },
+      {
+        "id": 6,
+        "question": "How do I apply a discount code?",
+        "answer": "During checkout, you'll see a \"Promo Code\" or \"Discount Code\" field. Enter your code there before completing your purchase. The discount will be applied to your order total."
+      },
+      {
+        "id": 7,
+        "question": "What payment methods do you accept?",
+        "answer": "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, Apple Pay, and Google Pay for your convenience and security."
+      },
+      {
+        "id": 8,
+        "question": "How do I contact customer support?",
+        "answer": "You can reach our customer support team via email at support@hexashop.com, phone at 1-800-HEXASHOP, or through our live chat feature on the website. We're available Monday-Friday, 9am-6pm EST."
+      }
+    ],
+    "contactTitle": "Didn't find what you're looking for?",
+    "contactDescription": "Our customer support team is here to help!",
+    "contactButtonText": "Contact Us"
   }
 };
 
 export const content: ContentType = ContentSchema.parse(contentData);
 
-export { HeaderSchema, SubHeaderSchema, SecondaryNavSchema, HeroSchema, MenSchema, DiscoverSchema, ExploreSchema, FooterSchema, CartSchema, FavoritesSchema, WomenSchema, KidsSchema, CheckoutSchema, AboutUsSchema, ContactUsSchema, TrackingSchema, ContentSchema };
-export type { HeaderType, SubHeaderType, SecondaryNavType, HeroType, MenType, DiscoverType, ExploreType, FooterType, CartType, FavoritesType, WomenType, KidsType, CheckoutType, AboutUsType, ContactUsType, TrackingType, ContentType };
+export { HeaderSchema, SubHeaderSchema, SecondaryNavSchema, HeroSchema, MenSchema, DiscoverSchema, ExploreSchema, FooterSchema, CartSchema, FavoritesSchema, WomenSchema, KidsSchema, CheckoutSchema, AboutUsSchema, ContactUsSchema, TrackingSchema, FAQSchema, ContentSchema };
+export type { HeaderType, SubHeaderType, SecondaryNavType, HeroType, MenType, DiscoverType, ExploreType, FooterType, CartType, FavoritesType, WomenType, KidsType, CheckoutType, AboutUsType, ContactUsType, TrackingType, FAQType, ContentType };
