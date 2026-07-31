@@ -208,6 +208,28 @@ const FAQSchema = z.object({
   contactButtonText: z.string(),
 });
 
+const ShippingSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  shippingOptions: z.array(z.object({
+    id: z.number(),
+    name: z.string(),
+    timeframe: z.string(),
+    cost: z.string(),
+    description: z.string(),
+  })),
+  internationalTitle: z.string(),
+  internationalDescription: z.string(),
+  trackingTitle: z.string(),
+  trackingDescription: z.string(),
+  faqsTitle: z.string(),
+  faqs: z.array(z.object({
+    id: z.number(),
+    question: z.string(),
+    answer: z.string(),
+  })),
+});
+
 const ContentSchema = z.object({
   Header: HeaderSchema,
   SubHeader: SubHeaderSchema,
@@ -234,6 +256,7 @@ const ContentSchema = z.object({
   ContactUs: ContactUsSchema.optional(),
   Tracking: TrackingSchema.optional(),
   FAQs: FAQSchema.optional(),
+  Shipping: ShippingSchema.optional(),
 });
 
 type HeaderType = z.infer<typeof HeaderSchema>;
@@ -253,6 +276,7 @@ type AboutUsType = z.infer<typeof AboutUsSchema>;
 type ContactUsType = z.infer<typeof ContactUsSchema>;
 type TrackingType = z.infer<typeof TrackingSchema>;
 type FAQType = z.infer<typeof FAQSchema>;
+type ShippingType = z.infer<typeof ShippingSchema>;
 type ContentType = z.infer<typeof ContentSchema>;
 const contentData = {
   "Header": {
@@ -508,10 +532,76 @@ const contentData = {
     "contactTitle": "Didn't find what you're looking for?",
     "contactDescription": "Our customer support team is here to help!",
     "contactButtonText": "Contact Us"
+  },
+  "Shipping": {
+    "title": "Shipping Information",
+    "description": "Learn about our shipping options, delivery times, and international shipping policies.",
+    "shippingOptions": [
+      {
+        "id": 1,
+        "name": "Standard Shipping",
+        "timeframe": "5-7 Business Days",
+        "cost": "FREE on orders over $50",
+        "description": "Perfect for most orders. Your items will be carefully packaged and shipped via our standard carrier."
+      },
+      {
+        "id": 2,
+        "name": "Expedited Shipping",
+        "timeframe": "2-3 Business Days",
+        "cost": "$9.99",
+        "description": "Get your order faster with our expedited shipping option. Great for gifts or urgent needs."
+      },
+      {
+        "id": 3,
+        "name": "Express Shipping",
+        "timeframe": "1 Business Day",
+        "cost": "$24.99",
+        "description": "Our fastest option for when you need it yesterday. Available for most locations in the continental US."
+      },
+      {
+        "id": 4,
+        "name": "Overnight Shipping",
+        "timeframe": "Next Business Day",
+        "cost": "$39.99",
+        "description": "Guaranteed next business day delivery for urgent orders. Limited availability."
+      }
+    ],
+    "internationalTitle": "International Shipping",
+    "internationalDescription": "We ship to over 100 countries worldwide. International orders typically take 7-21 business days depending on the destination. Customs duties and taxes are the responsibility of the recipient. For international inquiries, please contact our support team.",
+    "trackingTitle": "Order Tracking",
+    "trackingDescription": "Once your order ships, you'll receive a tracking number via email. You can use this number to track your package in real-time on our website or directly with the carrier.",
+    "faqsTitle": "Shipping FAQs",
+    "faqs": [
+      {
+        "id": 1,
+        "question": "When will my order arrive?",
+        "answer": "Delivery times depend on your shipping method and location. Standard shipping takes 5-7 business days. Order processing takes 24 hours, so your total delivery time will be processing time plus shipping time."
+      },
+      {
+        "id": 2,
+        "question": "Do you offer free shipping?",
+        "answer": "Yes! Standard shipping is free on orders over $50. For orders under $50, standard shipping is $5.99. Use code SHIP50 at checkout for free standard shipping on any order."
+      },
+      {
+        "id": 3,
+        "question": "Can I change my shipping address after ordering?",
+        "answer": "You can change your shipping address within 24 hours of placing your order, before it ships. Contact our customer support team immediately with your order number and new address."
+      },
+      {
+        "id": 4,
+        "question": "What if my package is lost or damaged?",
+        "answer": "We take full responsibility for items lost or damaged in transit. Please contact us immediately with photos of the damage or tracking information, and we'll arrange a replacement or refund."
+      },
+      {
+        "id": 5,
+        "question": "Do you ship to PO boxes?",
+        "answer": "We can ship to PO boxes for certain shipping methods. Please note that expedited and express shipping options are not available for PO box addresses."
+      }
+    ]
   }
 };
 
 export const content: ContentType = ContentSchema.parse(contentData);
 
-export { HeaderSchema, SubHeaderSchema, SecondaryNavSchema, HeroSchema, MenSchema, DiscoverSchema, ExploreSchema, FooterSchema, CartSchema, FavoritesSchema, WomenSchema, KidsSchema, CheckoutSchema, AboutUsSchema, ContactUsSchema, TrackingSchema, FAQSchema, ContentSchema };
-export type { HeaderType, SubHeaderType, SecondaryNavType, HeroType, MenType, DiscoverType, ExploreType, FooterType, CartType, FavoritesType, WomenType, KidsType, CheckoutType, AboutUsType, ContactUsType, TrackingType, FAQType, ContentType };
+export { HeaderSchema, SubHeaderSchema, SecondaryNavSchema, HeroSchema, MenSchema, DiscoverSchema, ExploreSchema, FooterSchema, CartSchema, FavoritesSchema, WomenSchema, KidsSchema, CheckoutSchema, AboutUsSchema, ContactUsSchema, TrackingSchema, FAQSchema, ShippingSchema, ContentSchema };
+export type { HeaderType, SubHeaderType, SecondaryNavType, HeroType, MenType, DiscoverType, ExploreType, FooterType, CartType, FavoritesType, WomenType, KidsType, CheckoutType, AboutUsType, ContactUsType, TrackingType, FAQType, ShippingType, ContentType };
