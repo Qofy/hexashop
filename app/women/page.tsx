@@ -14,14 +14,14 @@ export const metadata: Metadata = {
 export default function Women() {
   return (
     <>
-      <Section bgColor="bg-white" padding="sm">
+      <Section bgColor="bg-body-bg" padding="sm">
         <div className="h-6 md:h-8 lg:h-8"></div>
         <Container>
           <WomenProducts category="latest" title="Women's Latest"/>
         </Container>
       </Section>
 
-      <Section bgColor="bg-white" padding="md">
+      <Section bgColor="bg-body-bg" padding="md">
         <Container>
           <WomenProducts category="featured" title="Women's Featured"/>
         </Container>
@@ -37,13 +37,13 @@ export default function Women() {
         buttonText="Discover more"
       />
 
-      <Section bgColor="bg-white" padding="md">
+      <Section bgColor="bg-body-bg" padding="md">
         <Container>
           <WomenProducts category="casual" title="Casual"/>
         </Container>
       </Section>
 
-      <Section bgColor="bg-white" padding="md">
+      <Section bgColor="bg-body-bg" padding="md">
         <Container>
           <WomenProducts category="trending" title="Women's Trending"/>
         </Container>
